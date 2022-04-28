@@ -87,7 +87,7 @@ li {
     border: 1px solid #777;
 }
 
-input {
+.input {
     height: 30px;
     padding-left: 10px;
     margin: 9px;
@@ -165,37 +165,4 @@ input {
     transform: translate(-50%, -50%);
     max-width: 100%;
     height: auto;
-}
-
-.btn_area {
-    text-align: center;
-}
-
-.btn_area .save, .list, .btn_area .save1, .btn_area .save2 {
-    width: 100px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-}
-
-.btn_area .save:hover {
-    background-color: orange;
-
-    border: 1px solid orange;
-}
-
-.btn_area .save1:hover {
-    background-color: skyblue;
-
-    border: 1px solid skyblue;
-}
-
-.btn_area .save2:hover {
-    background-color: #3CB371;
-
-    border: 1px solid #3CB371;
-}
-
-.btn_area .update {
-    display: none;
 }
