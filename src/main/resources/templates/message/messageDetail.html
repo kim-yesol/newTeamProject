@@ -11,22 +11,24 @@
 </head>
 <body>
 
-    <div class="box">
-        <h3 class="title">보낸메시지</h3>
-        <h4 class="sender">TO.라이언</h4>
+    <form action="messageDetail" name="" method="get">
+    	<div class="box">
+        	<h3 class="title">보낸메시지</h3>
+        	<h4 class="sender">TO.[[${mesVO.mreceiver}]]</h4>
 
-        <div containerbox>
-            <div class="innerbox">
-                <span>넹 안녕하세욥</span>
-            </div>
-            <div class="innerbottom">
-                <button type="button" class="messageBtn" onclick="location.href='messageSend'">메세지쓰기</button>
-                <!-- 내가 보냈던사람에게 다시쓰기 -->
-                <button type="button" class="messageBtn">삭제</button>
-                <button type="button" class="messageBtn" onclick="location.href='messageList'">목록</button>
-            </div>
-        </div>
-    </div>
+        	<div class="containerbox">
+            	<div class="innerbox">
+                	<span>[[${mesVO.mcontent}]]</span>
+            	</div>
+            	<div class="innerbottom">
+                	<button type="button" class="messageBtn" onclick="location.href='messageReply'">재전송하기</button>
+                	<!-- 내가 보냈던사람에게 다시쓰기 -->
+                	<button type="button" class="messageBtn" th:onclick="|location.href='@{deleteSendMessage(mno=${mesVO.mno})}'|">삭제</button>
+                	<button type="button" class="messageBtn" onclick="location.href='messageSendList'">목록</button>
+            	</div>
+        	</div>
+    	</div>
+    </form>
     
 </body>
 </html>

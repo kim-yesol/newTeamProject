@@ -8,16 +8,15 @@
     
     <link rel="stylesheet" th:href="@{/css/message.css}">
 
-
 </head>
 <body>
 
-    <form name="sendForm" action="sendForm" method="post">
-    	<div class="box">
-        	<h3 class="title">메시지보내기</h3>
-        	<h4 class="receiver">TO.<input type="text" name="mreceiver" value="B">
-        	<input type="hidden" name="msender" value="세션에아이디"> <!-- 보내는사람 --></h4>
-
+    <form action="sendForm" name="#" method="post">
+        <div class="box">
+        	<h3 class="title">답장보내기</h3>
+        	<h4 class="receiver">TO.<input type="text" name="mreceiver" th:value="${mreceiver}" readonly="readonly"><!-- 받는사람 --></h4>
+        	<input type="hidden" name="msender" value="세션에아이디">
+        	
         	<div class="innerbox1">
             	<textarea class="textarea" name="mcontent" id="" cols="45" rows="18" ></textarea>
             	<input type="hidden" name="dm_sendDate">
@@ -28,7 +27,6 @@
         	</div>
     	</div>
     </form>
-
     
 </body>
 </html>
