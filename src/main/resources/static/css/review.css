@@ -87,7 +87,19 @@ li {
     border: 1px solid #777;
 }
 
-input {
+.search > input {
+    height: 30px;
+    padding-left: 10px;
+    margin: 9px;
+}
+
+.datepicker {
+    height: 30px;
+    padding-left: 10px;
+    margin: 9px;
+}
+
+.inputw150 {
     height: 30px;
     padding-left: 10px;
     margin: 9px;
