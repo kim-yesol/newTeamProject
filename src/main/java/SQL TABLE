@@ -1,0 +1,33 @@
+create table reviewboard(
+	review_no int auto_increment primary key,
+    review_regDate timestamp default now(),
+    review_category varchar(100),
+    review_writer varchar(50),
+    review_lat varchar(30) not null,
+    review_lng varchar(30) not null,
+    review_title varchar(100) not null,
+    review_content varchar(2000),
+    review_realAddress varchar(200) not null
+);
+
+
+CREATE TABLE USER(
+	USER_NO INT PRIMARY KEY AUTO_INCREMENT,
+    USER_ID VARCHAR(20) NOT NULL,
+    USER_PW VARCHAR(20) NOT NULL,
+    USER_NAME VARCHAR(10) NOT NULL,
+    USER_AGE INT NOT NULL,
+    USER_GENDER VARCHAR(1) DEFAULT 'M' CHECK(USER_GENDER IN ('W','M')) ,
+    USER_PHONE VARCHAR(20) 
+);
+
+CREATE TABLE REVIEW_UPLOAD(
+	REVIEW_UPLOAD_NO INT PRIMARY KEY AUTO_INCREMENT,
+    REVIEW_FILENAME VARCHAR(500) NOT NULL,
+    REVIEW_FILEPATH VARCHAR(100) NOT NULL,
+    REVIEW_UUID VARCHAR(50) NOT NULL,
+    REVIEW_REGDATE TIMESTAMP DEFAULT NOW(),
+    REVIEW_WRITER VARCHAR(30) 
+); 
+
+
