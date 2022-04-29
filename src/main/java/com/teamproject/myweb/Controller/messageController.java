@@ -17,8 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teamproject.myweb.command.MessageVO;
 import com.teamproject.myweb.message.MessageService;
-import com.teamproject.myweb.util.Criteria;
-import com.teamproject.myweb.util.PageVO;
+import com.teamproject.myweb.util.message_Criteria;
+import com.teamproject.myweb.util.message_PageVO;
 
 @Controller
 @RequestMapping("/message")
@@ -30,9 +30,9 @@ public class messageController {
 
 	//메시지 목록
 	@GetMapping("/messageReceiveList")
-	public String messageReceiveList(Model model, HttpSession session, Criteria cri) {
+	public String messageReceiveList(Model model, HttpSession session, message_Criteria cri) {
 		
-		PageVO receivepageVO = new PageVO(cri, messageService.getReceiveTotal("세션에아이디"));
+		message_PageVO receivepageVO = new message_PageVO(cri, messageService.getReceiveTotal("세션에아이디"));
 		cri.setPagee((cri.getPage() - 1) * cri.getAmount());
 		
 		
@@ -47,9 +47,9 @@ public class messageController {
 	}
 	
 	@GetMapping("/messageSendList")
-	public String messageSendList(Model model, Criteria cri) {
+	public String messageSendList(Model model, message_Criteria cri) {
 		
-		PageVO sendpageVO = new PageVO(cri, messageService.getSendTotal("세션에아이디"));
+		message_PageVO sendpageVO = new message_PageVO(cri, messageService.getSendTotal("세션에아이디"));
 		cri.setPagee((cri.getPage() - 1) * cri.getAmount());
 		ArrayList<MessageVO> list = messageService.getList("세션에아이디", cri);
 		
