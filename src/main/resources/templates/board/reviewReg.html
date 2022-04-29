@@ -19,7 +19,7 @@
         <div class="warp_inner">
             <div class="right_content">
                 <div class="midiaq">
-                    <form name="#####" action="#####" method="post">
+                    <form name="reviewForm" action="reviewForm" method="post" enctype="multipart/form-data">
                         <div class="full_collum collum">
                             <ul>
                                 <li class="collum_tit">
@@ -32,12 +32,12 @@
                                                 <tr>
                                                     <th>등록일</th>
                                                     <td colspan="5">
-                                                        <input type="text" class="datepicker" name="review_regDate" readonly placeholder="날짜선택" >
+                                                        <input type="text" class="datepicker" placeholder="날짜선택" value="null" readonly>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>작성자</th>
-                                                    <td><input type="text" class="inputw150" name="review_writer" value="" readonly></td>
+                                                    <td><input type="text" class="inputw150" name="review_writer" th:value="${session.userVO.user_name}" readonly></td>
                                                 </tr>
 
                                                 <tr>
@@ -45,7 +45,7 @@
                                                     <td>
                                                         <div class="category">
                                                             <div class="category_list">
-                                                                <input type="hidden" name="review_category" value="">
+                                                                <input type="hidden" name="review_category" value="1">
                                                             </div>
                                                         </div>
                                                     </td>
@@ -62,11 +62,9 @@
                                                                     <input type="text" class="output" disabled style="width: 400px;">
                                                                     <input type="hidden" id="lat" name="review_lat">
                                                                     <input type="hidden" id="lng" name="review_lng">
+                                                                    <input type="hidden" id="realAddress" name="review_realAddress">
                                                                 </div>
                                                                 <div id="map" style="width:100%;height:400px;padding:0;margin:0;"></div>
-                                                            </div>
-                                                            <div>
-
                                                             </div>
                                                         </div>
                                                     </td>
@@ -114,8 +112,8 @@
 
                                             </table>
                                             <div class="btn_area">
-                                                <input type="button" class="save" value="등록">
-                                            	<input type="button" class="save" value="목록">
+                                                <input type="submit" class="save" value="등록">
+                                            	<input type="button" class="save" value="목록" onclick="location.href='reviewBoard' ">
                                             </div>
                                         </li>
 
@@ -133,9 +131,48 @@
     
 </body>
 
-<script>
+<script th:inline="javascript">
 
     $(".datepicker").val($.datepicker.formatDate('yy-mm-dd', new Date()));
+    
+    $(document).ready(function() {
+
+    	var fileTarget = $('.filebox .upload-hidden'); //jquery는 다중 태그이벤트도 한번에 처리
+    	fileTarget.on('change', function(){ //change이벤트
+    	if(window.FileReader){ // modern browser 
+    		var filename = $(this)[0].files[0].name; } 
+    	else { // old IE 
+    		var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
+    	} // 추출한 파일명 삽입 
+    	$(this).siblings('.upload-name').val(filename); });
+
+    	var imgTarget = $('.preview-image .upload-hidden'); 
+    	imgTarget.on('change', function() { 
+    		var parent = $(this).parent(); 
+    		// parent.children('.upload-display').remove(); 
+    		
+    		if(window.FileReader){ //image 파일만 
+    			if (!$(this)[0].files[0].type.match(/image\//)) return; 
+
+    			var reader = new FileReader(); 
+    			reader.onload = function(e){ 
+    				var src = e.target.result; 
+    				// parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb"></div></div>'); 
+    				parent.find(".upload-thumb-wrap").children().attr("src", src);
+    			} 
+    			reader.readAsDataURL($(this)[0].files[0]); 
+    		} else { 
+    			$(this)[0].select(); 
+    			$(this)[0].blur(); 
+    			var imgSrc = document.selection.createRange().text; 
+    			parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img class="upload-thumb"></div></div>'); 
+
+    			var img = $(this).siblings('.upload-display').find('img'); 
+    			img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")"; 
+    		} 
+    	});
+
+    });
 
 
 

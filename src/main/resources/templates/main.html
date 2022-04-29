@@ -15,12 +15,11 @@
   <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
   <script th:src="@{/js/jquery-ui.min.js}"></script>
   <script th:src="@{/js/showMoreItems.min.js}"></script>
-  <script th:src="@{/js/map.js}"></script>
   
   <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
   <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
   <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
-  <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+  <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" >
   <link th:href="@{https://fonts.googleapis.com/css2?family=Lato&display=swap}" rel="stylesheet">
   <link rel="stylesheet" type="text/css" th:href="@{/css/showMoreItems-theme.min.css}" />
 
@@ -135,7 +134,7 @@
               <span style="font-size: 20px; font-weight: bold;">음식 종류</span>
           </div>
           <div>
-              <input type="checkbox" name="" id="checkbox1">
+              <input type="checkbox" name="" id="checkbox1" th:onclick="|food_check()|">
               <label for="checkbox1">
                   <div>
                       <span>한식</span>
@@ -143,7 +142,7 @@
               </label>
           </div>
           <div>
-              <input type="checkbox" name="" id="checkbox2">
+              <input type="checkbox" name="" id="checkbox2" th:onclick="|food_check()|">
               <label for="checkbox2">
                   <div>
                       <span>중식</span>
@@ -151,7 +150,7 @@
               </label>
           </div>
           <div>
-              <input type="checkbox" name="" id="checkbox3">
+              <input type="checkbox" name="" id="checkbox3" th:onclick="|food_check()|">
               <label for="checkbox3">
                   <div>
                       <span>일식</span>
@@ -159,7 +158,7 @@
               </label>
           </div>
           <div>
-              <input type="checkbox" name="" id="checkbox4">
+              <input type="checkbox" name="" id="checkbox4" th:onclick="|food_check()|">
               <label for="checkbox4">
                   <div>
                       <span>양식</span>
@@ -585,8 +584,20 @@
 
 </script>
 
-<script>
+<script th:inline="javascript">
+
+function food_check(){
+	if(this.checked){
+		console.log(1);
+	}
+}
+
+
+
 $(document).ready(function(){
+
+	
+	
   var map = new naver.maps.Map("map", {
       zoom: 6,
       center: new naver.maps.LatLng(36.2253017, 127.6460516),
@@ -598,15 +609,20 @@ $(document).ready(function(){
   });
 
   var markers = []
-  var data = accidentDeath.searchResult.accidentDeath;
   var infoWindows = [];
-
-
-
-
-  for (var i = 0, ii = data.length; i < ii; i++) {
-       var spot = data[i],
-          latlng = new naver.maps.LatLng(spot.grd_la, spot.grd_lo),
+  var locationArr = [];
+  
+  
+	$.getJSON("../getLocation",function(data){
+		
+		data.forEach(function(result,index){
+			locationArr.push(result);
+		});
+		
+  for (var i = 0, ii = locationArr.length; i < ii; i++) {
+       
+       var spot = locationArr[i],
+          latlng = new naver.maps.LatLng(spot.review_lng, spot.review_lat),
           marker = new naver.maps.Marker({
               position: latlng,
               draggable: false,
@@ -620,7 +636,8 @@ $(document).ready(function(){
                     ].join('')
               }
           });
-
+		
+		
           var contentString = [
               '<div class="iw_inner">',
               '   <h3>서울특별시청</h3>',
@@ -639,10 +656,34 @@ $(document).ready(function(){
               maxWidth : 300
 
           });
-          
+
       infoWindows.push(infoWindow);
       markers.push(marker);
-  }
+
+  }	
+	  	function getClickHandler(seq) {
+	  return function(e) {
+		
+	      var marker = markers[seq],
+	          infoWindow = infoWindows[seq];
+	
+	      if (infoWindow.getMap()) {
+	          infoWindow.close();
+	      } else {
+	          infoWindow.open(map, marker);
+	      }
+	  }
+	}
+	
+	
+	for (var i=0, ii=markers.length; i<ii; i++) {
+	  naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
+	  console.log(1);
+	}
+  
+
+});
+
   
 
 
@@ -685,13 +726,13 @@ $(document).ready(function(){
       indexGenerator: function(count) {
           var index = 0;
 
-          if (count >= 100 && count < 200) {
+          if (count >= 10 && count < 20) {
               index = 1;
-          } else if (count >= 200 && count < 500) {
+          } else if (count >= 20 && count < 30) {
               index = 2;
-          } else if (count >= 500 && count < 1000) {
+          } else if (count >= 30 && count < 50) {
               index = 3;
-          } else if (count >= 1000) {
+          } else if (count >= 50) {
               index = 4;
           }
 
@@ -728,8 +769,7 @@ function updateMarkers(map, markers) {
           showMarker(map, marker);
       } else {
           hideMarker(map, marker);
-      }
-      if(i == 100) break;
+      } 
       //데이터갯수가 많으면 멈춤
   }
 }
@@ -747,22 +787,6 @@ function hideMarker(map, marker) {
 }
 
 
-function getClickHandler(seq) {
-  return function(e) {
-      var marker = markers[seq],
-          infoWindow = infoWindows[seq];
-
-      if (infoWindow.getMap()) {
-          infoWindow.close();
-      } else {
-          infoWindow.open(map, marker);
-      }
-  }
-}
-
-for (var i=0, ii=markers.length; i<ii; i++) {
-  naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
-}
 
 
 

@@ -32,7 +32,16 @@
       <h1><a th:href="@{/main}">로고</a></h1>
       <div class="header_cont">
           <ul class="util">
-              <li><a th:href="@{/user/userLogin}">로그인</a></li>
+              <th:block th:if="${session.userVO} == null">
+              <li ><a th:href="@{/user/userLogin}">
+              로그인
+              </a></li>
+              </th:block>
+              <th:block th:unless="${session.userVO} == null">
+              <li ><a th:href="@{/user/myPage}">
+              마이페이지
+              </a></li>
+              </th:block>
               <li><a th:href="@{/user/userJoin}">회원가입</a></li>
           </ul>
 
