@@ -12,22 +12,29 @@
 </head>
 <body>
 
-    <div class="box">
+    <form action="messageReceive" name="" method="post">
+    	<div class="box">
         <h3 class="title">받은메시지</h3>
-        <h4 class="sender">FROM.라이언</h4>
+        <h4 class="sender">FROM.[[${mesVO.msender}]]</h4>
+        
 
-        <div containerbox>
+        <div class="containerbox">	
             <div class="innerbox">
-                <span>넹 안녕하세욥</span>
+                <span>[[${mesVO.mcontent}]]</span>
             </div>
             <div class="innerbottom">
-                <button type="button" class="messageBtn" onclick="location.href='messageSend'">답장</button>
+                <button type="button" class="messageBtn" th:onclick="|location.href='@{messageReply(mreceiver=${mesVO.msender}) }'| ">답장</button>
                 <!-- 나에게 쓴 사람에게 메세지 보내기-->
-                <button type="button" class="messageBtn">삭제</button>
-                <button type="button" class="messageBtn" onclick="location.href='messageList'">목록</button>
+                <button type="button" class="messageBtn" th:onclick="|location.href='@{deleteReceiveMessage(mno=${mesVO.mno})}'|">삭제</button>
+                <button type="button" class="messageBtn" onclick="location.href='messageReceiveList'">목록</button>
             </div>
         </div>
-    </div>
+    	</div>
+    </form>
+    
+    <script th:inline="javascript">
+    
+    </script>
     
 </body>
 </html>
