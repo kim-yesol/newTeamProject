@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.teamproject.myweb.command.freeBoardVO;
-import com.teamproject.myweb.util.Criteria;
+import com.teamproject.myweb.util.freeboard_Criteria;
 
 @Service("freeboardService")
 public class FreeBoardServiceImpl implements FreeBoardService {
@@ -15,7 +15,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	private FreeBoardMapper freeBoardMapper;
 
 	@Override
-	public ArrayList<freeBoardVO> getList(Criteria cri) {
+	public ArrayList<freeBoardVO> getList(freeboard_Criteria cri) {
 		return freeBoardMapper.getList(cri);
 	}
 
@@ -40,7 +40,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	}
 
 	@Override
-	public int getTotal(Criteria cri) {
+	public int getTotal(freeboard_Criteria cri) {
 		return freeBoardMapper.getTotal(cri);
 	}
 

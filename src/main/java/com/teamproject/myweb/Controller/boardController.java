@@ -15,13 +15,14 @@ import com.teamproject.myweb.command.CommentVO;
 import com.teamproject.myweb.command.freeBoardVO;
 import com.teamproject.myweb.comment.CommentService;
 import com.teamproject.myweb.freeBoard.FreeBoardService;
-import com.teamproject.myweb.util.Criteria;
-import com.teamproject.myweb.util.PageVO;
+import com.teamproject.myweb.review.boardService;
+import com.teamproject.myweb.util.freeboard_Criteria;
+import com.teamproject.myweb.util.freeboard_PageVO;
 import com.teamproject.myweb.command.DebateVO;
 import com.teamproject.myweb.debate.DebateService;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.teamproject.myweb.Service.boardService;
+
 import com.teamproject.myweb.command.Review_uploadVO;
 import com.teamproject.myweb.command.reviewVO;
 import com.teamproject.myweb.util.review_Criteria;
@@ -50,9 +51,9 @@ public class boardController {
 
 	
 	@GetMapping("/freeBoard")
-	public String freeBoard(Model model, Criteria cri, RedirectAttributes RA) {
+	public String freeBoard(Model model, freeboard_Criteria cri, RedirectAttributes RA) {
 		
-		PageVO pageVO = new PageVO(cri, freeBoardService.getTotal(cri));
+		freeboard_PageVO pageVO = new freeboard_PageVO(cri, freeBoardService.getTotal(cri));
 		cri.setLeftpage((cri.getPage() -1) * cri.getAmount());
 		ArrayList<freeBoardVO> list = freeBoardService.getList(cri);
 		

@@ -8,8 +8,8 @@ import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.teamproject.myweb.Service.boardService;
 import com.teamproject.myweb.command.UserVO;
+import com.teamproject.myweb.review.boardService;
 
 public class CheckHandler implements HandlerInterceptor{
 

@@ -1,4 +1,4 @@
-package com.teamproject.myweb.Service;
+package com.teamproject.myweb.review;
 
 import java.io.File;
 import java.io.IOException;

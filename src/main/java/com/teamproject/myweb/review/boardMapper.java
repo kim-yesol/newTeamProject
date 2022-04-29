@@ -1,9 +1,9 @@
-package com.teamproject.myweb.Service;
+package com.teamproject.myweb.review;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
+
+import org.apache.ibatis.annotations.Mapper;
 
 import com.teamproject.myweb.command.MainVO;
 import com.teamproject.myweb.command.Review_uploadVO;
@@ -14,9 +14,12 @@ import com.teamproject.myweb.util.review_Criteria;
 
 
 
-public interface boardService {
+@Mapper
+public interface boardMapper {
 	
-	public int reviewRegist(reviewVO vo, List<MultipartFile> list);
+	public int reviewRegist(reviewVO vo);
+	
+	public int reviewFileRegist(Review_uploadVO	uploadvo);
 	
 	public ArrayList<reviewVO> reviewList(review_Criteria cri);
 	

@@ -56,4 +56,24 @@ CREATE TABLE DEBATE (
 
 ===================================debate
 
+create table freeBoard (
+	free_bno int primary key auto_increment,
+    free_writer varchar(20) not null,
+    free_title varchar(50),
+    free_content varchar(1000),
+    free_regdate timestamp default now()
+	
+);
 
+=================================freeboard
+
+create table comment (
+	cno int primary key auto_increment,
+	free_bno int not null,
+	c_writer varchar(20) not null,
+    c_content varchar(500) not null,
+    c_regdate timestamp default now()
+
+);
+
+=================================comment

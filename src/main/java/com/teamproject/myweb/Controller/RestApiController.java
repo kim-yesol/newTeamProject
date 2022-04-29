@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.teamproject.myweb.Service.boardService;
 import com.teamproject.myweb.command.MainVO;
+import com.teamproject.myweb.review.boardService;
 
 @RestController
 public class RestApiController {
