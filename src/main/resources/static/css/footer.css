@@ -5,8 +5,9 @@
     margin-top: 50px;
     border-top: 1px solid #777
 }
-.row{
-    margin-top: 30px;
+.footerbox{
+    margin: 20px auto;
+    width: 1380px;
 }
 .footer_logo{
     padding: 0;

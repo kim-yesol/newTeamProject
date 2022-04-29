@@ -12,7 +12,6 @@
     <link rel="stylesheet" th:href="@{/css/review.css}">
     
     <style type="text/css">
-    
     .btn_area .save, .list, .btn_area .save1, .btn_area .save2,
 .btn_area2 .save1 {
     width: 100px;
@@ -115,6 +114,12 @@
 .btn_area2 {
 	text-align: center;
 }
+
+.c_writer {
+	border: none;
+}
+    
+    
     
     </style>
     
@@ -128,18 +133,17 @@
         <div class="warp_inner">
             <div class="right_content">
                 <div class="midiaq">
-                    <form name="freeBoardUpdate" action="#" method="post">
                         <div class="full_collum collum">
                             <ul>
                                 <li class="collum_tit">
-                                    <h2>게시글 수정</h2>
+                                    <h2>게시글 상세보기</h2>
 
                                     <span class="showtoggle minus"></span>
                                     <ul>
                                         <li>
                                             <table cellpadding="0" cellspacing="0" class="board_basic_view1" width="100%;">
                                                 <tr>
-                                                <input type="hidden" name="free_bno" th:value="${detail.free_bno}">
+                                               
                                                     <th>등록일</th>
                                                     <td colspan="5">
                                                         <input type="text" class="datepicker input" name="" readonly th:value="${#temporals.format(detail.free_regDate, 'yyyy-MM-dd') }">
@@ -152,32 +156,62 @@
 
                                                 <tr>
                                                     <th>제목</th>
-                                                    <td colspan="5"><input type="text" class="inputw99p" name="free_title" th:value="${detail.free_title}"></td>
+                                                    <td colspan="5"><input type="text" class="inputw99p" name="free_title" th:value="${detail.free_title}" readonly></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th>내용</th>
                                                     <td colspan="5">
                                                         <div>
-                                                            <textarea  class="inputw99p" name="free_content" style="height: 200px;">[[${detail.free_content}]]</textarea>
+                                                            <textarea  class="inputw99p" name="free_content" style="height: 200px;" readonly>[[${detail.free_content}]]</textarea>
                                                         </div>
                                                     </td>
                                                 </tr>
 
                                             </table>
-                                            
-                                                <div class="btn_area2">
-                                                	<input type="button" class="save1" value="목록" onclick="location.href='freeBoard'">
-                                                	<input type="button" class="save1" value="수정" th:onclick="|BoardUpdate()|">
-                                                	<input type="button" class="save1" value="삭제" th:onclick="|BoardDelete()|">
-                                               	</div>
+                                                  <strong>댓글목록</strong>
+                                            <hr>
+                                            <div class="commentList">
+                                                <table class="commentInner">
+                                                    <tr th:each="comment : ${commentVO}">
+                                                        <td class="commentWriter">[[${comment.c_writer}]]</td>
+                                                        <td class="commentContent">[[${comment.c_content}]]</td>
+                                                        <td class="commentDate">[[${ #temporals.format(comment.c_regdate, 'yyyy-MM-dd') }]]</td>
+                                                    </tr>
+                                                   
+                                                
+                                                </table>
+                                            </div>
+                                            <form action="commentReg" method="get">
+                                                  <div class="commentReg">
+                                                <div class="commentUser">
+                                                	<div>
+                                                		<p>댓글 작성</p>
+                                                	</div>
+                                                    <input type="text" class="c_writer" name="c_writer" value="세션에 로그인된 유저네임">
+                                                    <input type="hidden" name="free_bno" th:value="${detail.free_bno}">
+                                                </div>
+                                         
+                                                    <div class="commentArea">
+                                                        <textarea name="c_content" id="commentReg" cols="170" rows="1"></textarea>
+                                                       
+                                                            <div class="btn_area">
+                                                                <input type="button" class="save1" value="목록" onclick="location.href='freeBoard'">
+                                                                <!-- 수정은 세션id와 게시글 작성자id가 같을시 활성화-->
+                                                                <input type="button" class="save1" value="수정" th:onclick="'location.href=\'' + @{/board/freeBoardUpdate(free_bno=${detail.free_bno})} + '\''">
+                                                                <input type="submit" class="Reg save1" value="등록">
+                                                            </div>
+                                                    </div>
+                                             
+                                            </div>
+                                            </form>
+                                         
                                         </li>
 
                                     </ul>
                                 </li>
                             </ul>
                         </div>
-                    </form>
 
 
                 </div>
@@ -190,20 +224,6 @@
         $(".datepicker").val($.datepicker.formatDate('yy-mm-dd', new Date()));
         console.log(new Date());
     	
-        function BoardUpdate(){
-        	
-        	document.freeBoardUpdate.action="freeBoardUpdateForm";
-        	document.freeBoardUpdate.submit();
-        }
-        
-		function BoardDelete(){
-        	
-		if(confirm("삭제하면 다시 복구할 수 없습니다. 정말 삭제하시겠습니까?"))
-        	document.freeBoardUpdate.action="freeBoardDelete";
-        	document.freeBoardUpdate.submit();
-        }
-    
-    
     </script>
                 
     
