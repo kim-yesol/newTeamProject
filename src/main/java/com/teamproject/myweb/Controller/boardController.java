@@ -22,7 +22,6 @@ import com.teamproject.myweb.command.DebateVO;
 import com.teamproject.myweb.debate.DebateService;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.teamproject.myweb.command.Review_uploadVO;
 import com.teamproject.myweb.command.reviewVO;
 import com.teamproject.myweb.util.review_Criteria;
@@ -52,18 +51,22 @@ public class boardController {
 	
 	@GetMapping("/freeBoard")
 	public String freeBoard(Model model, freeboard_Criteria cri, RedirectAttributes RA) {
+
 		
 		freeboard_PageVO pageVO = new freeboard_PageVO(cri, freeBoardService.getTotal(cri));
 		cri.setLeftpage((cri.getPage() -1) * cri.getAmount());
 		ArrayList<freeBoardVO> list = freeBoardService.getList(cri);
 		
-		if(freeBoardService.getTotal(cri) == 0) {
-			RA.addFlashAttribute("msg", "검색 결과가 없습니다");
-			return "redirect:/board/freeBoard";
-		}
+//		if(freeBoardService.getTotal(cri) == 0) {
+//			RA.addFlashAttribute("msg", "검색 결과가 없습니다");
+//			return "redirect:/board/freeBoard";
+//		}
+		//무한루프 발생됨
 		
+		System.out.println("실행5");
 		model.addAttribute("list", list);
 		model.addAttribute("pageVO", pageVO);
+		System.out.println("실행6");
 		return "board/freeBoard";
 	}
 
