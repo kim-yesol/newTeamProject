@@ -3,7 +3,7 @@ package com.teamproject.myweb.util;
 import lombok.Data;
 
 @Data
-public class Criteria {
+public class deabate_Criteria {
 	
 	//sql문에 전달될 값을 가지고 다니는 클래스
 	private int page;
@@ -18,11 +18,11 @@ public class Criteria {
 	
 	
 	
-	public Criteria() {
+	public deabate_Criteria() {
 		this(1, 10);
 	}
 
-	public Criteria(int page, int amount) {
+	public deabate_Criteria(int page, int amount) {
 		super();
 		this.page = page;
 		this.amount = amount;

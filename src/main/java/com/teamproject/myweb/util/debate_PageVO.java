@@ -8,7 +8,7 @@ import lombok.Data;
 
 
 @Data //getter, setter
-public class PageVO {
+public class debate_PageVO {
 	//페이지네이션을 그리는 클래스
 	private int start; //첫페이지번호
 	private int end; //마지막페이지번호
@@ -20,14 +20,14 @@ public class PageVO {
 	private int total; //전체게시글 수
 	private int realEnd; //실제 끝번호
 	
-	private Criteria cri;
+	private deabate_Criteria cri;
 	
 	private List<Integer> pageList; //타임리프에서는 향상된 for문을 제공하기 때문에 페이지번호목록을 리스트에 저장
 	
 	
 	
 	//생성자 - pageVO는 생성될 떄, Criteria와 전체게시글 수를 받음.
-	public PageVO(Criteria cri, int total) {
+	public debate_PageVO(deabate_Criteria cri, int total) {
 		//페이지번호, 데이터개수, 총게시글 수 초기화
 		this.page = cri.getPage();
 		this.amount = cri.getAmount();
