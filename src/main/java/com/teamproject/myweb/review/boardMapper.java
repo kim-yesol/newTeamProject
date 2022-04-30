@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.teamproject.myweb.command.MainVO;
+import com.teamproject.myweb.command.Review_CategoryVO;
 import com.teamproject.myweb.command.Review_uploadVO;
 import com.teamproject.myweb.command.UserCheckVO;
 import com.teamproject.myweb.command.UserVO;
@@ -20,6 +21,8 @@ public interface boardMapper {
 	public int reviewRegist(reviewVO vo);
 	
 	public int reviewFileRegist(Review_uploadVO	uploadvo);
+	
+	public int reviewCategoryRegist(Review_CategoryVO vo);
 	
 	public ArrayList<reviewVO> reviewList(review_Criteria cri);
 	

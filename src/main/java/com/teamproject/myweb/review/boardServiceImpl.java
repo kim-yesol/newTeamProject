@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.teamproject.myweb.command.MainVO;
+import com.teamproject.myweb.command.Review_CategoryVO;
 import com.teamproject.myweb.command.Review_uploadVO;
 import com.teamproject.myweb.command.UserCheckVO;
 import com.teamproject.myweb.command.UserVO;
@@ -36,7 +38,7 @@ public class boardServiceImpl implements boardService{
 	
 	@Transactional
 	@Override
-	public int reviewRegist(reviewVO vo, List<MultipartFile> list) {
+	public int reviewRegist(reviewVO vo, List<MultipartFile> list, HashMap<Integer, Review_CategoryVO> map) {
 		
 		int result = boardmapper.reviewRegist(vo);
 		
@@ -68,7 +70,22 @@ public class boardServiceImpl implements boardService{
 			boardmapper.reviewFileRegist(uploadvo);
 			
 		}
-			return result;			
+	
+		
+		Review_CategoryVO vo0 = map.get(0);
+		System.out.println(vo0);
+		boardmapper.reviewCategoryRegist(vo0);
+		
+		Review_CategoryVO vo1 = map.get(1);
+		System.out.println(vo1);
+		boardmapper.reviewCategoryRegist(vo1);
+		
+		Review_CategoryVO vo2 = map.get(2);
+		System.out.println(vo2);
+		boardmapper.reviewCategoryRegist(vo2);
+		
+		
+		return result;			
 		
 	}
 	

@@ -49,6 +49,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</insert>
 	
+	<insert id="reviewCategoryRegist">
+		
+		<selectKey resultType="int" order="BEFORE" keyProperty="review_no">
+			select max(REVIEW_NO) as REVIEW_NO
+			from REVIEWBOARD
+			where REVIEW_WRITER = #{review_writer};
+		</selectKey>
+		
+		insert into review_category(
+			review_group,
+			review_category_lv,
+			review_category_detail_lv,
+			review_category_nm,
+			review_category_detail_nm,
+			review_category_parent_lv,
+			review_category_detail_parent_lv,
+			review_no,
+			review_writer
+		) values(
+			#{review_group},
+			#{review_category_lv},
+			#{review_category_detail_lv},
+			#{review_category_nm},
+			#{review_category_detail_nm},
+			#{review_category_parent_lv},
+			#{review_category_detail_parent_lv},
+			#{review_no},
+			#{review_writer}
+		)
+		
+	</insert>	
+	
 	<select id="reviewList" resultType="reviewVO">
 		<![CDATA[
 		SELECT *

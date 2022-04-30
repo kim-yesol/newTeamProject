@@ -1,9 +1,12 @@
 package com.teamproject.myweb.Controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +22,8 @@ import com.teamproject.myweb.review.boardService;
 import com.teamproject.myweb.util.freeboard_Criteria;
 import com.teamproject.myweb.util.freeboard_PageVO;
 import com.teamproject.myweb.command.DebateVO;
+import com.teamproject.myweb.command.Review_CategoryVO;
+import com.teamproject.myweb.command.Review_Upload_CategoryVO;
 import com.teamproject.myweb.debate.DebateService;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -62,11 +67,10 @@ public class boardController {
 //			return "redirect:/board/freeBoard";
 //		}
 		//무한루프 발생됨
-		
-		System.out.println("실행5");
+
 		model.addAttribute("list", list);
 		model.addAttribute("pageVO", pageVO);
-		System.out.println("실행6");
+
 		return "board/freeBoard";
 	}
 
@@ -218,8 +222,37 @@ public class boardController {
 	}
 	
 	@PostMapping("/reviewForm")
-	public String reviewform(reviewVO vo,Model model, RedirectAttributes RA,@RequestParam("file") List<MultipartFile> list) {
+	public String reviewform(reviewVO reviewvo,Model model, RedirectAttributes RA,@RequestParam("file") List<MultipartFile> list, Review_Upload_CategoryVO category) {
 		
+		reviewVO vo	=	reviewVO.builder().review_category(category.getReview_category_detail_nm()[0] + ">" + 
+														   category.getReview_category_detail_nm()[1] + ">" +
+														   category.getReview_category_detail_nm()[2])
+										  .review_content(reviewvo.getReview_content())
+										  .review_writer(reviewvo.getReview_writer())
+										  .review_lat(reviewvo.getReview_lat())
+										  .review_lng(reviewvo.getReview_lng())
+										  .review_title(reviewvo.getReview_title())
+										  .review_content(reviewvo.getReview_content())
+										  .review_realAddress(reviewvo.getReview_realAddress())
+										  .build();
+		HashMap<Integer, Review_CategoryVO> map = new HashMap<Integer, Review_CategoryVO>();
+		
+
+		for(int i = 0 ; i < category.getReview_category_detail_lv().length ; i++) {
+			Review_CategoryVO voi =	Review_CategoryVO.builder().review_group(category.getReview_group()[i])
+																.review_category_lv(category.getReview_category_lv()[i])
+																.review_category_detail_lv(category.getReview_category_detail_lv()[i])
+																.review_category_nm(category.getReview_category_nm()[i])
+																.review_category_detail_nm(category.getReview_category_detail_nm()[i])
+																.review_category_parent_lv(category.getReview_category_parent_lv()[i])
+																.review_category_detail_parent_lv(category.getReview_category_detail_parent_lv()[i])
+																.review_no(null)
+																.review_writer(category.getReview_writer())
+																.build();
+																map.put(i, voi);
+		}
+
+				
 		list = list.stream().filter( f -> f.isEmpty() == false).collect( Collectors.toList());
 		
 		for(MultipartFile f : list) {
@@ -228,8 +261,7 @@ public class boardController {
 				return "redirect:/board/reviewBoard";
 			}
 		}
-		
-		int result = boardservice.reviewRegist(vo,list);
+		int result = boardservice.reviewRegist(vo,list,map);
 		
 		if(result == 1) {
 			RA.addFlashAttribute("msg", "등록성공");
@@ -238,6 +270,8 @@ public class boardController {
 		}
 		
 		return "redirect:/board/reviewBoard";
+		
+
 	}
 	
 	@GetMapping("/debateBoard")
