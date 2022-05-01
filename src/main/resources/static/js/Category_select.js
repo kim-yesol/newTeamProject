@@ -535,7 +535,7 @@ var Junggu = [
 		"은행선화동","목동","중촌동","대흥동","문창동",
 		"석교동","대사동","부사동","용두동","오류동",
 		"태평1동","태평2동","유천1동","유천2동",
-		"문화1동","문화2동","산성동","","","",
+		"문화1동","문화2동","산성동"
 	];	
 		
 var Seogu = [
@@ -657,7 +657,21 @@ var order_select2 = [
     	}
     	for(var index in korea){
 			if($(e.target).val() == korea[index]){
-					$(e.target).parent().find("input[name='review_group']").val("A");
+				if($(e.target).val() == '서울'){
+					$(e.target).parent().find("input[name='review_group']").val("A");					
+				} else if($(e.target).val() == '부산'){
+					$(e.target).parent().find("input[name='review_group']").val("B");
+				} else if($(e.target).val() == '대구'){
+					$(e.target).parent().find("input[name='review_group']").val("C");
+				} else if($(e.target).val() == '인천'){
+					$(e.target).parent().find("input[name='review_group']").val("D");
+				} else if($(e.target).val() == '광주'){
+					$(e.target).parent().find("input[name='review_group']").val("E");
+				} else if($(e.target).val() == '대전'){
+					$(e.target).parent().find("input[name='review_group']").val("F");
+				} else if($(e.target).val() == '울산'){
+					$(e.target).parent().find("input[name='review_group']").val("G");
+				} 
 					$(e.target).parent().find("input[name='review_category_detail_lv']").val(index);	
 					city = order_select1[index];
 					detail = order_select2[index];
@@ -677,7 +691,7 @@ var order_select2 = [
     	}
 			for(var orders in city){
 				if($(e.target).val() == city[orders]){
-					$(e.target).parent().find("input[name='review_group']").val("B");
+					$(e.target).parent().find("input[name='review_group']").val($(e.target).parent().prev().find("input[name='review_group']").val());
 					$(e.target).parent().find("input[name='review_category_detail_lv']").val(orders);
 					$(e.target).parent().find("input[name='review_category_detail_parent_lv']").val($(e.target).parent().prev().find("input[name='review_category_detail_lv']").val());
 					citys = detail[orders];
@@ -697,7 +711,7 @@ var order_select2 = [
 		console.log(citys)
 		for(var index in citys){
 			if($(e.target).val() == citys[index]){
-				$(e.target).parent().find("input[name='review_group']").val("C");
+				$(e.target).parent().find("input[name='review_group']").val($(e.target).parent().prev().prev().find("input[name='review_group']").val());
 				$(e.target).parent().find("input[name='review_category_detail_lv']").val(index);
 				$(e.target).parent().find("input[name='review_category_detail_parent_lv']").val($(e.target).parent().prev().find("input[name='review_category_detail_lv']").val());			
 			}
