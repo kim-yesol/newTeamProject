@@ -19,6 +19,8 @@ import com.teamproject.myweb.command.freeBoardVO;
 import com.teamproject.myweb.comment.CommentService;
 import com.teamproject.myweb.freeBoard.FreeBoardService;
 import com.teamproject.myweb.review.boardService;
+import com.teamproject.myweb.util.debate_Criteria;
+import com.teamproject.myweb.util.debate_PageVO;
 import com.teamproject.myweb.util.freeboard_Criteria;
 import com.teamproject.myweb.util.freeboard_PageVO;
 import com.teamproject.myweb.command.DebateVO;
@@ -275,11 +277,17 @@ public class boardController {
 	}
 	
 	@GetMapping("/debateBoard")
-	public String debateBoard(Model model) {
+	public String debateBoard(Model model,
+							  debate_Criteria cri,
+							  RedirectAttributes RA) {
 		
-		ArrayList<DebateVO>list = debateService.getList();
+		debate_PageVO pageVO = new debate_PageVO(cri, debateService.getTotal(cri));
+		cri.setLeftpage((cri.getPage() -1) * cri.getAmount());
+		ArrayList<DebateVO>list = debateService.getList(cri);
 		
+		System.out.println(cri.toString());
 		model.addAttribute("list", list);
+		model.addAttribute("pageVO", pageVO);
 		
 		return "board/debateBoard";
 	}
@@ -295,6 +303,12 @@ public class boardController {
 							 RedirectAttributes RA) {
 		int result =  debateService.regist(vo);
 		System.out.println(result);
+		
+		if(result == 1) {
+			RA.addFlashAttribute("msg", "게시글이 등록되었습니다");
+		} else {
+			RA.addFlashAttribute("msg", "게시글 등록에 실패했습니다");
+		}
 		
 		return "redirect:/board/debateBoard";
 	}

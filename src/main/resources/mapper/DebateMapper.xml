@@ -22,9 +22,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getList" resultType="DebateVO">
 	
-		SELECT * FROM DEBATE
-		ORDER BY DEBATE_NO DESC
+		select A.*
+		from(select * from DEBATE
+		
+			<if test="searchOption == 'searchTitle'">
+				where debate_title like concat('%', #{searchKey}, '%')
+			</if>
+			
+			<if test="searchOption == 'searchWriter'">
+				where debate_writer like concat('%', #{searchKey}, '%')
+			</if>
+		
+	 		 order by debate_no desc) A 
+	 		 limit #{leftpage},#{amount}
+	</select>
 	
+	<select id="getTotal" resultType="int">
+		select count(*) AS TOTAL from DEBATE
+			<if test="searchOption == 'searchTitle'">
+				where debate_title like concat('%', #{searchKey}, '%')
+			</if>
+			
+			<if test="searchOption == 'searchWriter'">
+				where debate_writer like concat('%', #{searchKey}, '%')
+			</if>
+		
 	</select>
 	
 	<update id="update">
