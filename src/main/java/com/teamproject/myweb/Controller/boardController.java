@@ -123,7 +123,7 @@ public class boardController {
 	@PostMapping("/freeBoardDelete")
 	public String freeBoardDelete(@RequestParam("free_bno") int free_bno,
 								  RedirectAttributes RA) {
-		System.out.println(free_bno);
+	
 		int result = freeBoardService.delete(free_bno);
 		
 		if(result == 1) {
@@ -138,17 +138,30 @@ public class boardController {
 	public String commentReg(CommentVO vo, RedirectAttributes RA) {
 		
 		int result = commentService.commentReg(vo);
-		System.out.println(vo.toString());
 		
 		if(result == 1) {
 			RA.addFlashAttribute("msg", "댓글이 등록되었습니다");
 		} else {
 			RA.addFlashAttribute("msg", "댓글 등록에 실패했습니다");
 		}
+	
+		return "redirect:/board/freeBoardDetail?free_bno=" + vo.getFree_bno();
+	}
+	
+	@GetMapping("/commentDelete")
+	public String commentDelete(@RequestParam("cno") int cno,
+								@RequestParam("free_bno") int free_bno,
+								RedirectAttributes RA) {
 		
+			int result = commentService.commentDelete(cno);
+			
+			if(result == 1) {
+				RA.addFlashAttribute("msg", "댓글이 삭제되었습니다");
+			} else {
+				RA.addFlashAttribute("msg", "댓글 삭제에 실패했습니다. 관리자에게 문의하세요");
+			}
 		
-		
-		return "redirect:/board/freeBoardDetail";
+		return "redirect:/board/freeBoardDetail?free_bno=" + free_bno ;
 	}
 	
 

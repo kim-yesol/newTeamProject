@@ -20,4 +20,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					 		#{c_content}
 					 		)
 	</insert>
+	
+	<delete id="commentDelete">
+		delete from comment
+		where cno = #{cno}
+	</delete>
 </mapper>

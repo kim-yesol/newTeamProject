@@ -22,4 +22,11 @@ public class CommentServiceImpl implements CommentService {
 	public int commentReg(CommentVO vo) {
 		return commentMapper.commentReg(vo);
 	}
+
+	@Override
+	public int commentDelete(int cno) {
+		return commentMapper.commentDelete(cno);
+	}
+
+	
 }
