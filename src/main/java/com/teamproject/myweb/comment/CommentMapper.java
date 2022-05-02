@@ -10,5 +10,5 @@ import com.teamproject.myweb.command.CommentVO;
 public interface CommentMapper {
 	
 	public ArrayList<CommentVO> commentList(int free_bno);
-
+	public int commentReg(CommentVO vo);
 }

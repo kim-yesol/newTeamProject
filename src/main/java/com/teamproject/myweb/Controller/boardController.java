@@ -134,6 +134,23 @@ public class boardController {
 		return "redirect:/board/freeBoard";
 	}
 	
+	@GetMapping("/commentReg")
+	public String commentReg(CommentVO vo, RedirectAttributes RA) {
+		
+		int result = commentService.commentReg(vo);
+		System.out.println(vo.toString());
+		
+		if(result == 1) {
+			RA.addFlashAttribute("msg", "댓글이 등록되었습니다");
+		} else {
+			RA.addFlashAttribute("msg", "댓글 등록에 실패했습니다");
+		}
+		
+		
+		
+		return "redirect:/board/freeBoardDetail";
+	}
+	
 
 	@GetMapping("/reviewBoard")
 	public String reviewBoard(Model model, review_Criteria cri) {

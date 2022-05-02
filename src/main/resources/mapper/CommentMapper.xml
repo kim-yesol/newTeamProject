@@ -10,4 +10,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where free_bno = #{free_bno}
 	</select>
 
+	<insert id="commentReg">
+		insert into comment(free_bno,
+							c_writer,
+							c_content
+							)
+					 values(#{free_bno},
+					 		#{c_writer},
+					 		#{c_content}
+					 		)
+	</insert>
 </mapper>

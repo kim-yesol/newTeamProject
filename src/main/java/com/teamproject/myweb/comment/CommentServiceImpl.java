@@ -17,4 +17,9 @@ public class CommentServiceImpl implements CommentService {
 	public ArrayList<CommentVO> commentList(int free_bno) {
 		return commentMapper.commentList(free_bno);
 	}
+
+	@Override
+	public int commentReg(CommentVO vo) {
+		return commentMapper.commentReg(vo);
+	}
 }

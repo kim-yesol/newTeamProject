@@ -190,6 +190,7 @@
                                                 	</div>
                                                     <input type="text" class="c_writer" name="c_writer" value="세션에 로그인된 유저네임">
                                                     <input type="hidden" name="free_bno" th:value="${detail.free_bno}">
+                                                    <input type="hidden" name="c_regdate" class="datepicker">
                                                 </div>
                                          
                                                     <div class="commentArea">
@@ -219,11 +220,17 @@
         </div>
     </div>
 	<th:block th:replace="~{/include/footer :: f_include }"></th:block>
-    <script>
+    <script th:inline="javascript">
 
         $(".datepicker").val($.datepicker.formatDate('yy-mm-dd', new Date()));
         console.log(new Date());
     	
+        (function() {
+    		var msg = JSON.parse('[[${msg}]]');	
+    		if(msg != null) {
+    			alert(msg);
+    		}
+    	})();
     </script>
                 
     

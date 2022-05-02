@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class CommentVO {
 
 	private Integer cno;
-	private Integer free_bno;
+	private String free_bno;
 	@NotBlank
 	private String c_writer;
 	@NotBlank
