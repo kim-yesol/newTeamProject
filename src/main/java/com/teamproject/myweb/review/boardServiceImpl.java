@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.teamproject.myweb.command.MainVO;
 import com.teamproject.myweb.command.Review_CategoryVO;
+import com.teamproject.myweb.command.Review_Upload_CategoryVO;
 import com.teamproject.myweb.command.Review_uploadVO;
 import com.teamproject.myweb.command.UserCheckVO;
 import com.teamproject.myweb.command.UserVO;
@@ -118,8 +119,64 @@ public class boardServiceImpl implements boardService{
 	}
 
 	@Override
-	public int updateReview(reviewVO vo) {
-		return boardmapper.updateReview(vo);
+	public int updateReview(reviewVO vo, List<MultipartFile> list,HashMap<Integer, Review_Upload_CategoryVO> map) {
+				
+		int REVIEW_UPLOAD_NO = boardmapper.getCategoryPrimeKey(vo.getReview_no());
+		
+		for(MultipartFile f : list) {
+			
+			String originname = f.getOriginalFilename();
+			
+			String filename = originname.substring( originname.lastIndexOf("\\")+1 );
+			
+			String filepath = filemaker(); 
+			
+			String uuid = UUID.randomUUID().toString();
+			
+			String savename = uploadpath + "\\" + filepath + "\\" + uuid + "_" + filename;
+			
+			File file = new File(savename);
+			
+			try {
+				f.transferTo(file);
+			}  catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			int review_upload_no = boardmapper.getUploadPrimeKey(vo.getReview_no());
+			
+			Review_uploadVO	uploadvo = Review_uploadVO.builder().review_filename(filename)
+															 .review_filepath(filepath)
+															 .review_uuid(uuid)
+															 .review_writer(vo.getReview_writer())
+															 .review_no(vo.getReview_no())
+															 .review_upload_no(review_upload_no)
+															 .build();
+			System.out.println(uploadvo.toString());
+			boardmapper.reviewFileUpdate(uploadvo);
+			
+		}
+	
+		Review_Upload_CategoryVO category = map.get(0);
+		
+		for(int i = 0 ; i < category.getReview_category_detail_lv().length ; i++) {
+		Review_CategoryVO voi =	Review_CategoryVO.builder().review_group(category.getReview_group()[i])
+								.review_category_lv(category.getReview_category_lv()[i])
+								.review_category_detail_lv(category.getReview_category_detail_lv()[i])
+								.review_category_nm(category.getReview_category_nm()[i])
+								.review_category_detail_nm(category.getReview_category_detail_nm()[i])
+								.review_category_parent_lv(category.getReview_category_parent_lv()[i])
+								.review_category_detail_parent_lv(category.getReview_category_detail_parent_lv()[i])
+								.review_no(vo.getReview_no())
+								.review_writer(category.getReview_writer())
+								.review_category_no(REVIEW_UPLOAD_NO)
+								.build();
+			boardmapper.reviewCategoryUpdate(voi);
+		}
+		
+		int result = boardmapper.updateReview(vo);
+		
+		return result;
 	}
 
 	@Override
@@ -141,6 +198,27 @@ public class boardServiceImpl implements boardService{
 	public ArrayList<Review_uploadVO> getImg(int review_no) {
 		return boardmapper.getImg(review_no);
 	}
+
+	@Override
+	public int deletePhoto(Review_uploadVO vo) {
+		return boardmapper.deletePhoto(vo);
+	}
+
+	@Override
+	public int deleteCategory(Review_CategoryVO vo) {
+		return boardmapper.deleteCategory(vo);
+	}
+
+	@Override
+	public ArrayList<Review_uploadVO> getUploadList(int review_no) {
+		return boardmapper.getUploadList(review_no);
+	}
+
+	@Override
+	public ArrayList<Review_CategoryVO> getCategory(int review_no) {
+		return boardmapper.getCategory(review_no);
+	}
+	
 	
 	
 	

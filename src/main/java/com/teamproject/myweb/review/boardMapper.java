@@ -32,11 +32,27 @@ public interface boardMapper {
 	
 	public int updateReview(reviewVO vo);
 	
+	public int reviewFileUpdate(Review_uploadVO	uploadvo);
+	
+	public int reviewCategoryUpdate(Review_CategoryVO vo);
+	
 	public int deleteReview(int review_no);
+	
+	public int deletePhoto(Review_uploadVO vo);
+	
+	public int deleteCategory(Review_CategoryVO vo);
 	
 	public ArrayList<MainVO> getLocation();
 	
 	public UserVO userCheckes(UserCheckVO vo);
 	
 	public ArrayList<Review_uploadVO> getImg(int review_no);
+	
+	public ArrayList<Review_uploadVO> getUploadList(int review_no);
+	
+	public ArrayList<Review_CategoryVO> getCategory(int review_no);
+	
+	public int getUploadPrimeKey(int review_no);
+	
+	public int getCategoryPrimeKey(int review_no);
 }
