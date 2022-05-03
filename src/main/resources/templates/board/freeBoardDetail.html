@@ -176,7 +176,12 @@
                                                     <tr th:each="comment : ${commentVO}">
                                                         <td class="commentWriter">[[${comment.c_writer}]]</td>
                                                         <td class="commentContent">[[${comment.c_content}]]</td>
-                                                        <td class="commentDate">[[${ #temporals.format(comment.c_regdate, 'yyyy-MM-dd') }]]</td>
+                                                        <td class="commentDate">[[${ #temporals.format(comment.c_regdate, 'yyyy-MM-dd') }]]
+                                                        	      				<input type="button" value="삭제" style="border:none;" th:onclick="'location.href=\'' + @{/board/commentDelete(free_bno=${comment.free_bno},cno=${comment.cno})} + '\''">
+                                                        	      				<!-- onclick="location.href='commentDelete?cno=${comment.cno}&free_bno=${comment.free_bno}'" -->
+                                                        	      				<!-- th:onclick="'location.href=\'' + @{/board/commentDelete(free_bno=${commentVO.free_bno}&cno=${commentVO.cno})} + '\''" -->
+                                                        </td>
+
                                                     </tr>
                                                    
                                                 
@@ -190,6 +195,7 @@
                                                 	</div>
                                                     <input type="text" class="c_writer" name="c_writer" value="세션에 로그인된 유저네임">
                                                     <input type="hidden" name="free_bno" th:value="${detail.free_bno}">
+                                                    
                                                 </div>
                                          
                                                     <div class="commentArea">
@@ -219,11 +225,21 @@
         </div>
     </div>
 	<th:block th:replace="~{/include/footer :: f_include }"></th:block>
-    <script>
+    <script th:inline="javascript">
 
+        (function() {
+    		var msg = JSON.parse('[[${msg}]]');	
+    		if(msg != null) {
+    			alert(msg);
+    		}
+    	})();
+        
         $(".datepicker").val($.datepicker.formatDate('yy-mm-dd', new Date()));
         console.log(new Date());
     	
+    
+        	
+        
     </script>
                 
     
