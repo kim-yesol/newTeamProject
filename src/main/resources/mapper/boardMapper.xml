@@ -181,7 +181,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	
 	<select id="getLocation" resultType="MainVO">
-		SELECT REVIEW_LAT,REVIEW_LNG,review_realaddress,review_no
+		SELECT *
 		FROM REVIEWBOARD
 	</select>
 	

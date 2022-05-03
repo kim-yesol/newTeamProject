@@ -4,8 +4,27 @@ li {
 
 .category_selector{
 	display: inline;
+	position: relative;
 }
 
+.youtube_link{
+    display: none;
+}
+
+.search{
+	position: relative;
+}
+
+.hidden1{
+  opacity: 0;
+  width: 0;
+  float: left; 
+  pointer-events: none;
+  width:100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
 
 .category_select { 
 		-webkit-appearance: none; /* 네이티브 외형 감추기 */ 
