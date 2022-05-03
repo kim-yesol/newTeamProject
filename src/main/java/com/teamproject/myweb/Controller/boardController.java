@@ -1,9 +1,12 @@
 package com.teamproject.myweb.Controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +18,17 @@ import com.teamproject.myweb.command.CommentVO;
 import com.teamproject.myweb.command.freeBoardVO;
 import com.teamproject.myweb.comment.CommentService;
 import com.teamproject.myweb.freeBoard.FreeBoardService;
-import com.teamproject.myweb.util.Criteria;
-import com.teamproject.myweb.util.PageVO;
+import com.teamproject.myweb.review.boardService;
+import com.teamproject.myweb.util.debate_Criteria;
+import com.teamproject.myweb.util.debate_PageVO;
+import com.teamproject.myweb.util.freeboard_Criteria;
+import com.teamproject.myweb.util.freeboard_PageVO;
 import com.teamproject.myweb.command.DebateVO;
+import com.teamproject.myweb.command.Review_CategoryVO;
+import com.teamproject.myweb.command.Review_Upload_CategoryVO;
 import com.teamproject.myweb.debate.DebateService;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.teamproject.myweb.Service.boardService;
 import com.teamproject.myweb.command.Review_uploadVO;
 import com.teamproject.myweb.command.reviewVO;
 import com.teamproject.myweb.util.review_Criteria;
@@ -50,19 +57,22 @@ public class boardController {
 
 	
 	@GetMapping("/freeBoard")
-	public String freeBoard(Model model, Criteria cri, RedirectAttributes RA) {
+	public String freeBoard(Model model, freeboard_Criteria cri, RedirectAttributes RA) {
+
 		
-		PageVO pageVO = new PageVO(cri, freeBoardService.getTotal(cri));
+		freeboard_PageVO pageVO = new freeboard_PageVO(cri, freeBoardService.getTotal(cri));
 		cri.setLeftpage((cri.getPage() -1) * cri.getAmount());
 		ArrayList<freeBoardVO> list = freeBoardService.getList(cri);
 		
-		if(freeBoardService.getTotal(cri) == 0) {
-			RA.addFlashAttribute("msg", "검색 결과가 없습니다");
-			return "redirect:/board/freeBoard";
-		}
-		
+//		if(freeBoardService.getTotal(cri) == 0) {
+//			RA.addFlashAttribute("msg", "검색 결과가 없습니다");
+//			return "redirect:/board/freeBoard";
+//		}
+		//무한루프 발생됨
+
 		model.addAttribute("list", list);
 		model.addAttribute("pageVO", pageVO);
+
 		return "board/freeBoard";
 	}
 
@@ -202,10 +212,37 @@ public class boardController {
 	}
 	
 	@PostMapping("/reviewModfiy")
-	public String reviewModfiy(reviewVO vo, RedirectAttributes RA) {
-		System.out.println(vo.toString());
+	public String reviewModfiy(reviewVO reviewvo, RedirectAttributes RA,@RequestParam("file") List<MultipartFile> list, Review_Upload_CategoryVO category) {
+
 		
-		int result = boardservice.updateReview(vo);
+		reviewVO vo	=	reviewVO.builder().review_category(category.getReview_category_detail_nm()[0] + ">" + 
+														   category.getReview_category_detail_nm()[1] + ">" +
+														   category.getReview_category_detail_nm()[2])
+												.review_content(reviewvo.getReview_content())
+												.review_writer(reviewvo.getReview_writer())
+												.review_lat(reviewvo.getReview_lat())
+												.review_lng(reviewvo.getReview_lng())
+												.review_title(reviewvo.getReview_title())
+												.review_content(reviewvo.getReview_content())
+												.review_realAddress(reviewvo.getReview_realAddress())
+												.review_no(reviewvo.getReview_no())
+												.build();
+		HashMap<Integer, Review_Upload_CategoryVO> map = new HashMap<Integer, Review_Upload_CategoryVO>();
+
+
+		map.put(0, category);
+
+
+		list = list.stream().filter( f -> f.isEmpty() == false).collect( Collectors.toList());
+		
+		for(MultipartFile f : list) {
+			if(f.getContentType().contains("image") == false) {
+				RA.addFlashAttribute("msg","이미지파일을 넣으세요");
+				return "redirect:/board/reviewBoard";
+			}
+		}
+		
+		int result = boardservice.updateReview(vo,list,map);
 		
 		if(result == 1) {
 			RA.addFlashAttribute("msg", "수정성공");
@@ -221,6 +258,19 @@ public class boardController {
 	public String reviewDetele(@RequestParam("review_no") int review_no,RedirectAttributes RA) {
 		
 		int result = boardservice.deleteReview(review_no);
+		
+		ArrayList<Review_uploadVO> list1 = boardservice.getUploadList(review_no);
+		ArrayList<Review_CategoryVO> list2 = boardservice.getCategory(review_no);
+		
+		for(Review_uploadVO vo : list1) {
+			boardservice.deletePhoto(vo);
+		}
+		
+		for(Review_CategoryVO vo : list2) {
+			boardservice.deleteCategory(vo);
+		}
+			
+		
 		
 		if(result == 1) {
 			RA.addFlashAttribute("msg", "삭제성공");
@@ -244,8 +294,37 @@ public class boardController {
 	}
 	
 	@PostMapping("/reviewForm")
-	public String reviewform(reviewVO vo,Model model, RedirectAttributes RA,@RequestParam("file") List<MultipartFile> list) {
+	public String reviewform(reviewVO reviewvo, RedirectAttributes RA,@RequestParam("file") List<MultipartFile> list, Review_Upload_CategoryVO category) {
 		
+		reviewVO vo	=	reviewVO.builder().review_category(category.getReview_category_detail_nm()[0] + ">" + 
+														   category.getReview_category_detail_nm()[1] + ">" +
+														   category.getReview_category_detail_nm()[2])
+										  .review_content(reviewvo.getReview_content())
+										  .review_writer(reviewvo.getReview_writer())
+										  .review_lat(reviewvo.getReview_lat())
+										  .review_lng(reviewvo.getReview_lng())
+										  .review_title(reviewvo.getReview_title())
+										  .review_content(reviewvo.getReview_content())
+										  .review_realAddress(reviewvo.getReview_realAddress())
+										  .build();
+		HashMap<Integer, Review_CategoryVO> map = new HashMap<Integer, Review_CategoryVO>();
+		
+
+		for(int i = 0 ; i < category.getReview_category_detail_lv().length ; i++) {
+			Review_CategoryVO voi =	Review_CategoryVO.builder().review_group(category.getReview_group()[i])
+																.review_category_lv(category.getReview_category_lv()[i])
+																.review_category_detail_lv(category.getReview_category_detail_lv()[i])
+																.review_category_nm(category.getReview_category_nm()[i])
+																.review_category_detail_nm(category.getReview_category_detail_nm()[i])
+																.review_category_parent_lv(category.getReview_category_parent_lv()[i])
+																.review_category_detail_parent_lv(category.getReview_category_detail_parent_lv()[i])
+																.review_no(null)
+																.review_writer(category.getReview_writer())
+																.build();
+																map.put(i, voi);
+		}
+
+				
 		list = list.stream().filter( f -> f.isEmpty() == false).collect( Collectors.toList());
 		
 		for(MultipartFile f : list) {
@@ -254,8 +333,7 @@ public class boardController {
 				return "redirect:/board/reviewBoard";
 			}
 		}
-		
-		int result = boardservice.reviewRegist(vo,list);
+		int result = boardservice.reviewRegist(vo,list,map);
 		
 		if(result == 1) {
 			RA.addFlashAttribute("msg", "등록성공");
@@ -264,14 +342,22 @@ public class boardController {
 		}
 		
 		return "redirect:/board/reviewBoard";
+		
+
 	}
 	
 	@GetMapping("/debateBoard")
-	public String debateBoard(Model model) {
+	public String debateBoard(Model model,
+							  debate_Criteria cri,
+							  RedirectAttributes RA) {
 		
-		ArrayList<DebateVO>list = debateService.getList();
+		debate_PageVO pageVO = new debate_PageVO(cri, debateService.getTotal(cri));
+		cri.setLeftpage((cri.getPage() -1) * cri.getAmount());
+		ArrayList<DebateVO>list = debateService.getList(cri);
 		
+		System.out.println(cri.toString());
 		model.addAttribute("list", list);
+		model.addAttribute("pageVO", pageVO);
 		
 		return "board/debateBoard";
 	}
@@ -287,6 +373,12 @@ public class boardController {
 							 RedirectAttributes RA) {
 		int result =  debateService.regist(vo);
 		System.out.println(result);
+		
+		if(result == 1) {
+			RA.addFlashAttribute("msg", "게시글이 등록되었습니다");
+		} else {
+			RA.addFlashAttribute("msg", "게시글 등록에 실패했습니다");
+		}
 		
 		return "redirect:/board/debateBoard";
 	}

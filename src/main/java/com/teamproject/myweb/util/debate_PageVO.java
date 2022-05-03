@@ -20,14 +20,14 @@ public class debate_PageVO {
 	private int total; //전체게시글 수
 	private int realEnd; //실제 끝번호
 	
-	private deabate_Criteria cri;
+	private debate_Criteria cri;
 	
 	private List<Integer> pageList; //타임리프에서는 향상된 for문을 제공하기 때문에 페이지번호목록을 리스트에 저장
 	
 	
 	
 	//생성자 - pageVO는 생성될 떄, Criteria와 전체게시글 수를 받음.
-	public debate_PageVO(deabate_Criteria cri, int total) {
+	public debate_PageVO(debate_Criteria cri, int total) {
 		//페이지번호, 데이터개수, 총게시글 수 초기화
 		this.page = cri.getPage();
 		this.amount = cri.getAmount();
@@ -38,11 +38,11 @@ public class debate_PageVO {
 		//page가 5라면 -> 끝페이지 번호 10
 		//page가 15라면 -> 끝페이지 번호 20
 		//공식 = (int)Math.ceil( 조회하는 페이지 / 페이지네이션 개수) * 페이지네이션 개수
-		this.end = (int)Math.ceil( this.page / 5.0 ) * 5;
+		this.end = (int)Math.ceil( this.page / 10.0 ) * 10;
 		
 		//2. 첫 페이지 계산
 		//공식 = 끝페이지 - 페이지네이션 개수 + 1
-		this.start = this.end - 5 + 1;
+		this.start = this.end - 10 + 1;
 		
 		//3. 실제 끝페이지 번호 계산
 		//총 게시글 수가 53개 -> 실제끝번호 6, 마지막 페이지 10

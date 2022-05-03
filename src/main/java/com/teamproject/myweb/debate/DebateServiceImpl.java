@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.teamproject.myweb.command.DebateUploadVO;
 import com.teamproject.myweb.command.DebateVO;
-import com.teamproject.myweb.util.deabate_Criteria;
+import com.teamproject.myweb.util.debate_Criteria;
 
 @Service("debateService")
 public class DebateServiceImpl implements DebateService {
@@ -27,15 +27,15 @@ public class DebateServiceImpl implements DebateService {
 	}
 
 	@Override
-	public ArrayList<DebateVO> getList() {
+	public ArrayList<DebateVO> getList(debate_Criteria cri) {
 		
-		return debateMapper.getList();
+		return debateMapper.getList(cri);
 	}
 
 	@Override
-	public int getTotal(deabate_Criteria cri) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getTotal(debate_Criteria cri) {
+		
+		return debateMapper.getTotal(cri);
 	}
 
 	@Override

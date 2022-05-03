@@ -44,9 +44,41 @@
                                                     <th>카테고리</th>
                                                     <td>
                                                         <div class="category">
-                                                            <div class="category_list">
-                                                                <input type="hidden" name="review_category" value="1">
-                                                            </div>
+                                                        		<div class="category_selector">
+	                                                                <select class="category_select" name="review_category_detail_nm" id="category_select1">
+	                                                                	<option>시/도선택</option>                                                            	
+	                                                                </select> 
+	                                                                <input type="hidden" name="review_group" value="">
+	                                                                <input type="hidden" name="review_category_lv" value="1">
+	                                                                <input type="hidden" name="review_category_detail_lv" value="">
+	                                                                <input type="hidden" name="review_category_nm" value="대분류">
+	                                                                <input type="hidden" name="review_category_parent_lv" value="0">
+	                                                                <input type="hidden" name="review_category_detail_parent_lv" value="0">
+                                                        		</div>
+                                                                
+                                                        		<div class="category_selector">
+	                                                                <select class="category_select" name="review_category_detail_nm" id="category_select2">
+	                                                                	<option>군/구선택</option>	                                                            	
+	                                                                </select> 
+	                                                                <input type="hidden" name="review_group" value="">
+	                                                                <input type="hidden" name="review_category_lv" value="2">
+	                                                                <input type="hidden" name="review_category_detail_lv" value="">
+	                                                                <input type="hidden" name="review_category_nm" value="중분류">
+	                                                                <input type="hidden" name="review_category_parent_lv" value="1">
+	                                                                <input type="hidden" name="review_category_detail_parent_lv" value="">	                                                                
+                                                        		</div>
+                                                                                                                                
+                                                        		<div class="category_selector">
+	                                                                <select class="category_select" name="review_category_detail_nm" id="category_select3">
+	                                                                	<option>동/읍/면선택</option>                                                                	
+	                                                                </select> 
+	                                                                <input type="hidden" name="review_group" value="">
+	                                                                <input type="hidden" name="review_category_lv" value="3">
+	                                                                <input type="hidden" name="review_category_detail_lv" value="">
+	                                                                <input type="hidden" name="review_category_nm" value="소분류">
+	                                                                <input type="hidden" name="review_category_parent_lv" value="2">
+	                                                                <input type="hidden" name="review_category_detail_parent_lv" value="">	                                                                
+                                                        		</div> 
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -56,7 +88,7 @@
                                                     <td>
                                                         <div class="inputmap">
                                                             <div class="regist">
-                                                                <div class="search" style>
+                                                                <div class="search" >
                                                                     <input id="address" type="text" placeholder="검색할 주소" value="서울시 용산구 동자동">
                                                                     <input id="submit" type="button" value="주소 검색">
                                                                     <input type="text" class="output" disabled style="width: 400px;">
@@ -171,11 +203,17 @@
     			img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")"; 
     		} 
     	});
+    	
 
     });
+	
 
-
+    
+  
 
 
 </script>
+
+<script th:src="@{/js/Category_select.js}"></script> 
+
 </html>

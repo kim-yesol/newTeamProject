@@ -8,11 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.teamproject.myweb.Service.boardService;
 import com.teamproject.myweb.command.MainVO;
+import com.teamproject.myweb.review.boardService;
 
 @RestController
 public class RestApiController {
@@ -27,7 +28,13 @@ public class RestApiController {
 	public ArrayList<MainVO> getLocation() {
 			
 		ArrayList<MainVO> list= boardservice.getLocation();
-		System.out.println(list.toString());
+		return list;
+	}
+	
+	@GetMapping("/photo_category/{review_no}")
+	public ArrayList<MainVO> photo_category(@PathVariable("review_no") int review_no) {
+			
+		ArrayList<MainVO> list= boardservice.getPhoto_Category();
 		return list;
 	}
 	

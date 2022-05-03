@@ -3,7 +3,7 @@ package com.teamproject.myweb.util;
 import lombok.Data;
 
 @Data
-public class Criteria {
+public class freeboard_Criteria {
 
 	private int page;
 	private int amount;
@@ -14,12 +14,12 @@ public class Criteria {
 	private String searchKey;
 	private String searchoption;
 	
-	public Criteria() {
+	public freeboard_Criteria() {
 		this(1, 10);
 	}
 	
 		
-	public Criteria(int page, int amount) {
+	public freeboard_Criteria(int page, int amount) {
 		this.page = page;
 		this.amount = amount;
 		

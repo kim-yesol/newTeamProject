@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 import lombok.Data;
 
 @Data
-public class PageVO {
+public class freeboard_PageVO {
 
 	private int start;
 	private int end;
@@ -21,11 +21,11 @@ public class PageVO {
 	
 	
 	
-	private Criteria cri;
+	private freeboard_Criteria cri;
 	
 	private List<Integer> pageList;
 
-	public PageVO(Criteria cri, int total) {
+	public freeboard_PageVO(freeboard_Criteria cri, int total) {
 		this.page = cri.getPage();
 		this.amount = cri.getAmount();
 		this.total = total;
