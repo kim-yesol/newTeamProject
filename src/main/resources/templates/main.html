@@ -611,16 +611,19 @@ $(document).ready(function(){
   var markers = []
   var infoWindows = [];
   var locationArr = [];
-  
+  var photo_category = [];
   
 	$.getJSON("../getLocation",function(data){
 		
 		data.forEach(function(result,index){
 			locationArr.push(result);
 		});
+	
+
+		
 		
   for (var i = 0, ii = locationArr.length; i < ii; i++) {
-       
+       console.log(locationArr);
        var spot = locationArr[i],
           latlng = new naver.maps.LatLng(spot.review_lng, spot.review_lat),
           marker = new naver.maps.Marker({
@@ -637,6 +640,15 @@ $(document).ready(function(){
               }
           });
 		
+	$.getJSON("../photo_category/"+locationArr[i].review_no,function(data){
+		
+		data.forEach(function(result,index){
+			console.log(1);
+			photo_category.push(result);
+		})	
+	});	
+  
+	console.log(photo_category);
 		
           var contentString = [
               '<div class="iw_inner">',
@@ -678,7 +690,6 @@ $(document).ready(function(){
 	
 	for (var i=0, ii=markers.length; i<ii; i++) {
 	  naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
-	  console.log(1);
 	}
   
 

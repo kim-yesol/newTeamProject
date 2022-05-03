@@ -136,14 +136,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="reviewFileUpdate">
 		update review_upload
-			set review_filename = #{review_filename}
-				review_filepath = #{review_filepath}
+			set review_filename = #{review_filename},
+				review_filepath = #{review_filepath},
 				review_uuid = #{review_uuid}
 			where review_upload_no = #{review_upload_no}
 	</update>
 	
 	<update id="reviewCategoryUpdate">
-	
+		update review_category
+			set review_group = #{review_group},
+				review_category_lv = #{review_category_lv},
+				review_category_detail_lv = #{review_category_detail_lv},
+				review_category_nm = #{review_category_nm},
+				review_category_detail_nm = #{review_category_detail_nm},
+				review_category_parent_lv = #{review_category_parent_lv},
+				review_category_detail_parent_lv = #{review_category_detail_parent_lv}
+			where review_category_no = #{review_category_no}
 	</update>
 	
 	<select id="getUploadList" resultType="Review_uploadVO">
@@ -173,8 +181,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	
 	<select id="getLocation" resultType="MainVO">
-		SELECT REVIEW_LAT,REVIEW_LNG
+		SELECT REVIEW_LAT,REVIEW_LNG,review_realaddress,review_no
 		FROM REVIEWBOARD
+	</select>
+	
+	
+	<select id="getPhoto_Category" resultType="MainVO">
+		select *
+		from review_upload
+		where review_no = #{review_no} 	
 	</select>
 	
 	<select id="userCheckes" resultType="UserVO">
@@ -188,14 +203,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getUploadPrimeKey" resultType="int">
-		SELECT max(REVIEW_UPLOAD_NO)
-		AS REVIEW_UPLOAD_NO FROM REVIEW_UPLOAD
+		SELECT * FROM REVIEW_UPLOAD
 		WHERE REVIEW_NO = #{review_no}
 	</select>
 	
 	<select id="getCategoryPrimeKey" resultType="int">
-		SELECT max(REVIEW_CATEGORY_NO)
-		AS REVIEW_CATEGORY_NO FROM REVIEW_CATEGORY
+		SELECT * FROM REVIEW_CATEGORY
 		WHERE REVIEW_NO = #{review_no}
 	</select>
 	

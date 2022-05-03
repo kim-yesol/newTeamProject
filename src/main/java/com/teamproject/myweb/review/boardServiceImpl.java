@@ -121,8 +121,8 @@ public class boardServiceImpl implements boardService{
 	@Override
 	public int updateReview(reviewVO vo, List<MultipartFile> list,HashMap<Integer, Review_Upload_CategoryVO> map) {
 				
-		int REVIEW_UPLOAD_NO = boardmapper.getCategoryPrimeKey(vo.getReview_no());
 		
+		int file_i = 0;
 		for(MultipartFile f : list) {
 			
 			String originname = f.getOriginalFilename();
@@ -143,23 +143,26 @@ public class boardServiceImpl implements boardService{
 				e.printStackTrace();
 			}
 			
-			int review_upload_no = boardmapper.getUploadPrimeKey(vo.getReview_no());
+			ArrayList<Integer> file_list = boardmapper.getUploadPrimeKey(vo.getReview_no());
 			
 			Review_uploadVO	uploadvo = Review_uploadVO.builder().review_filename(filename)
 															 .review_filepath(filepath)
 															 .review_uuid(uuid)
 															 .review_writer(vo.getReview_writer())
 															 .review_no(vo.getReview_no())
-															 .review_upload_no(review_upload_no)
+															 .review_upload_no(file_list.get(file_i))
 															 .build();
 			System.out.println(uploadvo.toString());
 			boardmapper.reviewFileUpdate(uploadvo);
+			file_i++;
 			
 		}
 	
 		Review_Upload_CategoryVO category = map.get(0);
 		
 		for(int i = 0 ; i < category.getReview_category_detail_lv().length ; i++) {
+			
+		ArrayList<Integer> Category_list = boardmapper.getCategoryPrimeKey(vo.getReview_no());
 		Review_CategoryVO voi =	Review_CategoryVO.builder().review_group(category.getReview_group()[i])
 								.review_category_lv(category.getReview_category_lv()[i])
 								.review_category_detail_lv(category.getReview_category_detail_lv()[i])
@@ -169,8 +172,10 @@ public class boardServiceImpl implements boardService{
 								.review_category_detail_parent_lv(category.getReview_category_detail_parent_lv()[i])
 								.review_no(vo.getReview_no())
 								.review_writer(category.getReview_writer())
-								.review_category_no(REVIEW_UPLOAD_NO)
+								.review_category_no(Category_list.get(i))
 								.build();
+		
+			System.out.println(voi.toString());
 			boardmapper.reviewCategoryUpdate(voi);
 		}
 		
@@ -217,6 +222,11 @@ public class boardServiceImpl implements boardService{
 	@Override
 	public ArrayList<Review_CategoryVO> getCategory(int review_no) {
 		return boardmapper.getCategory(review_no);
+	}
+
+	@Override
+	public ArrayList<MainVO> getPhoto_Category() {
+		return boardmapper.getPhoto_Category();
 	}
 	
 	

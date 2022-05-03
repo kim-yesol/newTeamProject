@@ -44,6 +44,8 @@ public interface boardMapper {
 	
 	public ArrayList<MainVO> getLocation();
 	
+	public ArrayList<MainVO> getPhoto_Category();
+	
 	public UserVO userCheckes(UserCheckVO vo);
 	
 	public ArrayList<Review_uploadVO> getImg(int review_no);
@@ -52,7 +54,7 @@ public interface boardMapper {
 	
 	public ArrayList<Review_CategoryVO> getCategory(int review_no);
 	
-	public int getUploadPrimeKey(int review_no);
+	public ArrayList<Integer> getUploadPrimeKey(int review_no);
 	
-	public int getCategoryPrimeKey(int review_no);
+	public ArrayList<Integer> getCategoryPrimeKey(int review_no);
 }
