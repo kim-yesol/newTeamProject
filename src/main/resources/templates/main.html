@@ -114,8 +114,7 @@
       </p>
     </li>
   </ul>
-  <div class="youtube_link" style="margin-left: 255px; margin-top: 40px; margin-bottom: 40px;">
-  </div>
+  <div class="youtube_link" style="margin-left: 255px; margin-top: 40px; margin-bottom: 40px;"></div>
 </div>
 
 
@@ -806,11 +805,54 @@ function hideMarker(map, marker) {
 
   $(".img img").click(function(e){
 	
-		console.log($(e.target).closest("div").find(".youtube_link"));
+		
 	
-		if($(e.target).parent().parent().next().html() == '서울'){
-			$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/tli25GoI8yg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+
+		if($(e.target).parent().parent().next().html() == '강원'){
+			if($(".youtube_link").html() == '' ){
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/ANTdfJ6-js8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			} else{
+				$(".youtube_link").children().remove();
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/ANTdfJ6-js8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			}
 		}
+		
+		if($(e.target).parent().parent().next().html() == '경주'){
+			if($(".youtube_link").html() == '' ){
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/pNBaDD3pgyY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			} else{
+				$(".youtube_link").children().remove();
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/pNBaDD3pgyY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			}
+		}		
+		
+		if($(e.target).parent().parent().next().html() == '제주'){
+			if($(".youtube_link").html() == '' ){
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/R-t4oCm-szQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			} else{
+				$(".youtube_link").children().remove();
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/R-t4oCm-szQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			}
+		}		
+		
+		if($(e.target).parent().parent().next().html() == '서울'){
+			if($(".youtube_link").html() == '' ){
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/tli25GoI8yg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			} else{
+				$(".youtube_link").children().remove();
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/tli25GoI8yg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			}
+		}		
+		
+		if($(e.target).parent().parent().next().html() == '부산'){
+			if($(".youtube_link").html() == '' ){
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/IZBommf56BU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			} else{
+				console.log($(".youtube_link").children().remove());
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/IZBommf56BU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			}
+		}		
+		
 	})
 
   $(".img img").mouseleave(function(e){
