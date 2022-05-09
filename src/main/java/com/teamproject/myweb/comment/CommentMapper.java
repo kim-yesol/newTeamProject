@@ -3,7 +3,6 @@ package com.teamproject.myweb.comment;
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import com.teamproject.myweb.command.CommentVO;
 

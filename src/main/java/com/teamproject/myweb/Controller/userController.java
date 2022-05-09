@@ -12,11 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.teamproject.myweb.Service.boardService;
+
 import com.teamproject.myweb.command.ExamineVO;
 import com.teamproject.myweb.command.UserCheckVO;
 import com.teamproject.myweb.command.UserVO;
 import com.teamproject.myweb.user.UserService;
+
+
+import com.teamproject.myweb.command.UserCheckVO;
+import com.teamproject.myweb.command.UserVO;
+import com.teamproject.myweb.review.boardService;
 
 
 @Controller
