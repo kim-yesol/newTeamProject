@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<selectKey resultType="int" order="BEFORE" keyProperty="review_no">
 			select max(REVIEW_NO) as REVIEW_NO
 			from REVIEWBOARD
-			where REVIEW_WRITER = #{review_writer};
+			where REVIEW_WRITER = #{review_writer}
 		</selectKey>
 		
 		insert into review_upload(
@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<selectKey resultType="int" order="BEFORE" keyProperty="review_no">
 			select max(REVIEW_NO) as REVIEW_NO
 			from REVIEWBOARD
-			where REVIEW_WRITER = #{review_writer};
+			where REVIEW_WRITER = #{review_writer}
 		</selectKey>
 		
 		insert into review_category(
@@ -123,7 +123,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE review_no = #{review_no}
 	</select>
 	
-	<insert id="updateReview">
+	<update id="updateReview">
 		update REVIEWBOARD 
 				SET REVIEW_CATEGORY = #{review_category},
 					REVIEW_LAT = #{review_lat},
@@ -131,26 +131,84 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				    REVIEW_TITLE = #{review_title},
 				    REVIEW_CONTENT = #{review_content},
 				    REVIEW_REALADDRESS = #{review_realAddress}
-				WHERE REVIEW_NO = #{review_no};
-	</insert>
+				WHERE REVIEW_NO = #{review_no}
+	</update>
+	
+	<update id="reviewFileUpdate">
+		update review_upload
+			set review_filename = #{review_filename},
+				review_filepath = #{review_filepath},
+				review_uuid = #{review_uuid}
+			where review_upload_no = #{review_upload_no}
+	</update>
+	
+	<update id="reviewCategoryUpdate">
+		update review_category
+			set review_group = #{review_group},
+				review_category_lv = #{review_category_lv},
+				review_category_detail_lv = #{review_category_detail_lv},
+				review_category_nm = #{review_category_nm},
+				review_category_detail_nm = #{review_category_detail_nm},
+				review_category_parent_lv = #{review_category_parent_lv},
+				review_category_detail_parent_lv = #{review_category_detail_parent_lv}
+			where review_category_no = #{review_category_no}
+	</update>
+	
+	<select id="getUploadList" resultType="Review_uploadVO">
+		select * from review_upload
+		where review_no = #{review_no}
+	</select>
+	
+	<select id="getCategory" resultType="Review_CategoryVO">
+		select * from review_category
+		where review_no = #{review_no} 
+	</select>
 	
 	<delete id="deleteReview">
 		DELETE FROM REVIEWBOARD
 		WHERE REVIEW_NO=#{review_no}
 	</delete>
 	
+	<delete id="deleteCategory">
+		DELETE FROM REVIEW_CATEGORY
+		WHERE REVIEW_CATEGORY_NO=#{review_category_no}	
+	</delete>
+	
+	<delete id="deletePhoto">
+		DELETE FROM REVIEW_UPLOAD
+		WHERE REVIEW_UPLOAD_NO=#{review_upload_no}	
+	</delete>		
+		
+	
 	<select id="getLocation" resultType="MainVO">
-		SELECT REVIEW_LAT,REVIEW_LNG
+		SELECT *
 		FROM REVIEWBOARD
+	</select>
+	
+	
+	<select id="getPhoto_Category" resultType="MainVO">
+		select *
+		from review_upload
+		where review_no = #{review_no} 	
 	</select>
 	
 	<select id="userCheckes" resultType="UserVO">
 		SELECT * FROM USER
-		WHERE USER_ID = #{user_id} AND USER_PW = #{user_pw};
+		WHERE USER_ID = #{user_id} AND USER_PW = #{user_pw}
 	</select>
 	
 	<select id="getImg" resultType="Review_uploadVO">
 		SELECT * FROM REVIEW_UPLOAD
+		WHERE REVIEW_NO = #{review_no}
+	</select>
+	
+	<select id="getUploadPrimeKey" resultType="int">
+		SELECT * FROM REVIEW_UPLOAD
+		WHERE REVIEW_NO = #{review_no}
+	</select>
+	
+	<select id="getCategoryPrimeKey" resultType="int">
+		SELECT * FROM REVIEW_CATEGORY
 		WHERE REVIEW_NO = #{review_no}
 	</select>
 	

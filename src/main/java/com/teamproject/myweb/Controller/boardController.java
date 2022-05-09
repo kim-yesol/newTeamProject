@@ -133,7 +133,7 @@ public class boardController {
 	@PostMapping("/freeBoardDelete")
 	public String freeBoardDelete(@RequestParam("free_bno") int free_bno,
 								  RedirectAttributes RA) {
-		System.out.println(free_bno);
+	
 		int result = freeBoardService.delete(free_bno);
 		
 		if(result == 1) {
@@ -142,6 +142,36 @@ public class boardController {
 			RA.addFlashAttribute("msg", "게시글 삭제에 실패했습니다. 관리자에게 문의하세요");
 		}
 		return "redirect:/board/freeBoard";
+	}
+	
+	@GetMapping("/commentReg")
+	public String commentReg(CommentVO vo, RedirectAttributes RA) {
+		
+		int result = commentService.commentReg(vo);
+		
+		if(result == 1) {
+			RA.addFlashAttribute("msg", "댓글이 등록되었습니다");
+		} else {
+			RA.addFlashAttribute("msg", "댓글 등록에 실패했습니다");
+		}
+	
+		return "redirect:/board/freeBoardDetail?free_bno=" + vo.getFree_bno();
+	}
+	
+	@GetMapping("/commentDelete")
+	public String commentDelete(@RequestParam("cno") int cno,
+								@RequestParam("free_bno") int free_bno,
+								RedirectAttributes RA) {
+		
+			int result = commentService.commentDelete(cno);
+			
+			if(result == 1) {
+				RA.addFlashAttribute("msg", "댓글이 삭제되었습니다");
+			} else {
+				RA.addFlashAttribute("msg", "댓글 삭제에 실패했습니다. 관리자에게 문의하세요");
+			}
+		
+		return "redirect:/board/freeBoardDetail?free_bno=" + free_bno ;
 	}
 	
 
@@ -182,10 +212,37 @@ public class boardController {
 	}
 	
 	@PostMapping("/reviewModfiy")
-	public String reviewModfiy(reviewVO vo, RedirectAttributes RA) {
-		System.out.println(vo.toString());
+	public String reviewModfiy(reviewVO reviewvo, RedirectAttributes RA,@RequestParam("file") List<MultipartFile> list, Review_Upload_CategoryVO category) {
+
 		
-		int result = boardservice.updateReview(vo);
+		reviewVO vo	=	reviewVO.builder().review_category(category.getReview_category_detail_nm()[0] + ">" + 
+														   category.getReview_category_detail_nm()[1] + ">" +
+														   category.getReview_category_detail_nm()[2])
+												.review_content(reviewvo.getReview_content())
+												.review_writer(reviewvo.getReview_writer())
+												.review_lat(reviewvo.getReview_lat())
+												.review_lng(reviewvo.getReview_lng())
+												.review_title(reviewvo.getReview_title())
+												.review_content(reviewvo.getReview_content())
+												.review_realAddress(reviewvo.getReview_realAddress())
+												.review_no(reviewvo.getReview_no())
+												.build();
+		HashMap<Integer, Review_Upload_CategoryVO> map = new HashMap<Integer, Review_Upload_CategoryVO>();
+
+
+		map.put(0, category);
+
+
+		list = list.stream().filter( f -> f.isEmpty() == false).collect( Collectors.toList());
+		
+		for(MultipartFile f : list) {
+			if(f.getContentType().contains("image") == false) {
+				RA.addFlashAttribute("msg","이미지파일을 넣으세요");
+				return "redirect:/board/reviewBoard";
+			}
+		}
+		
+		int result = boardservice.updateReview(vo,list,map);
 		
 		if(result == 1) {
 			RA.addFlashAttribute("msg", "수정성공");
@@ -201,6 +258,19 @@ public class boardController {
 	public String reviewDetele(@RequestParam("review_no") int review_no,RedirectAttributes RA) {
 		
 		int result = boardservice.deleteReview(review_no);
+		
+		ArrayList<Review_uploadVO> list1 = boardservice.getUploadList(review_no);
+		ArrayList<Review_CategoryVO> list2 = boardservice.getCategory(review_no);
+		
+		for(Review_uploadVO vo : list1) {
+			boardservice.deletePhoto(vo);
+		}
+		
+		for(Review_CategoryVO vo : list2) {
+			boardservice.deleteCategory(vo);
+		}
+			
+		
 		
 		if(result == 1) {
 			RA.addFlashAttribute("msg", "삭제성공");
@@ -224,7 +294,7 @@ public class boardController {
 	}
 	
 	@PostMapping("/reviewForm")
-	public String reviewform(reviewVO reviewvo,Model model, RedirectAttributes RA,@RequestParam("file") List<MultipartFile> list, Review_Upload_CategoryVO category) {
+	public String reviewform(reviewVO reviewvo, RedirectAttributes RA,@RequestParam("file") List<MultipartFile> list, Review_Upload_CategoryVO category) {
 		
 		reviewVO vo	=	reviewVO.builder().review_category(category.getReview_category_detail_nm()[0] + ">" + 
 														   category.getReview_category_detail_nm()[1] + ">" +

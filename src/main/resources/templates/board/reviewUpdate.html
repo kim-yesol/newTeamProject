@@ -23,7 +23,7 @@
         <div class="warp_inner">
             <div class="right_content">
                 <div class="midiaq">
-                    <form name="form_select" action="#####" method="post">
+                    <form name="form_select" action="#####" method="post" enctype="multipart/form-data">
                         <div class="full_collum collum">
                             <ul>
                                 <li class="collum_tit">
@@ -51,11 +51,43 @@
 
                                                 <tr>
                                                     <th>카테고리</th>
-                                                    <td>
-                                                        <div class="category">
-                                                            <div class="category_list">
-                                                                <input type="hidden" name="review_category" value="1">
-                                                            </div>
+														<td>
+                                                        	<div class="category">
+                                                        		<div class="category_selector">
+	                                                                <select class="category_select" name="review_category_detail_nm" id="category_select1">
+	                                                                	<option>시/도선택</option>                                                            	
+	                                                                </select> 
+	                                                                <input type="hidden" name="review_group" value="">
+	                                                                <input type="hidden" name="review_category_lv" value="1">
+	                                                                <input type="hidden" name="review_category_detail_lv" value="">
+	                                                                <input type="hidden" name="review_category_nm" value="대분류">
+	                                                                <input type="hidden" name="review_category_parent_lv" value="0">
+	                                                                <input type="hidden" name="review_category_detail_parent_lv" value="0">
+                                                        		</div>
+                                                                
+                                                        		<div class="category_selector">
+	                                                                <select class="category_select" name="review_category_detail_nm" id="category_select2">
+	                                                                	<option>군/구선택</option>	                                                            	
+	                                                                </select> 
+	                                                                <input type="hidden" name="review_group" value="">
+	                                                                <input type="hidden" name="review_category_lv" value="2">
+	                                                                <input type="hidden" name="review_category_detail_lv" value="">
+	                                                                <input type="hidden" name="review_category_nm" value="중분류">
+	                                                                <input type="hidden" name="review_category_parent_lv" value="1">
+	                                                                <input type="hidden" name="review_category_detail_parent_lv" value="">	                                                                
+                                                        		</div>
+                                                                                                                                
+                                                        		<div class="category_selector">
+	                                                                <select class="category_select" name="review_category_detail_nm" id="category_select3">
+	                                                                	<option>동/읍/면선택</option>                                                                	
+	                                                                </select> 
+	                                                                <input type="hidden" name="review_group" value="">
+	                                                                <input type="hidden" name="review_category_lv" value="3">
+	                                                                <input type="hidden" name="review_category_detail_lv" value="">
+	                                                                <input type="hidden" name="review_category_nm" value="소분류">
+	                                                                <input type="hidden" name="review_category_parent_lv" value="2">
+	                                                                <input type="hidden" name="review_category_detail_parent_lv" value="">	                                                                
+                                                        		</div> 
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -98,10 +130,27 @@
                                                                         <img class="upload-thumb" th:src="@{../display(review_filepath=${imgs.review_filepath}, review_uuid=${imgs.review_uuid}, review_filename=${imgs.review_filename} ) }">
                                                                     </span>
                                                                 </label>
+                                                            </div>
+                                                        </th:block>
+                                                        <div>
+                                                        	<div class="left">
+                                                                <label class="upload-display" for="a_file">
+                                                                    <span class="upload-thumb-wrap">
+                                                                        <img class="upload-thumb" th:src="@{/img/plus_btn.png}">
+                                                                    </span>
+                                                                </label>
                                                                 <input class="upload-name" value="파일선택" disabled="disabled">
                                                                 <input type="file" name="file" id="a_file" class="upload-hidden">
                                                             </div>
-                                                        </th:block>
+                                                            <div class="left">
+                                                                <label class="upload-display" for="b_file">
+                                                                    <span class="upload-thumb-wrap">
+                                                                        <img class="upload-thumb" th:src="@{/img/plus_btn.png}">
+                                                                    </span>
+                                                                </label>
+                                                                <input class="upload-name" value="파일선택" disabled="disabled">
+                                                                <input type="file" name="file" id="b_file" class="upload-hidden">
+                                                            </div>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -352,6 +401,6 @@
     
     </script>
                 
-    
+    <script th:src="@{/js/Category_select.js}"></script>
 </body>
 </html>
