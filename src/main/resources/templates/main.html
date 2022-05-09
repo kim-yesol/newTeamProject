@@ -646,12 +646,19 @@ $(document).ready(function(){
 		 
 		/*직접거는방식*/
           var contentString = [
-              '<div class="iw_inner">',
-              '   <h4>여행지:' +spot.review_category  +  '</h4>',
-              '   <p>' + spot.review_realaddress + '<br>',
-              '		<span>리뷰 보러가기:</span>',
-              '       <a href="#"><img src="img/inchac.png" width="55" height="55" alt="서울시청" class="thumb" onclick="detail_function(' + spot.review_no + ')"/></a><br>',
+              '<div class="iw_inner" style="border: 1px solid #777; border-radius: 25px; width:315px" >',
+              '   <h4 style="margin-left:14px; margin-top:13px; font-style:oblique;">' +spot.review_category  +  '</h4>',
+              '   <p style="margin-left:14px; font-style:oblique;">' + spot.review_realaddress + '<br></p>',
+              '<div style="overflow:hidden;">',
+              '<span style="width:130px; height:130px; display:block; border-radius:50%; float:left; margin:3px 17px auto">',
+              '<a href="#"><img class="upload-thumb" style="border-radius: 50%; display: block; height:100%; border:0; max-width:100%" onclick="detail_function(' + spot.review_no + ')" src="/display?review_filepath='+spot.review_filepaths[i] +'&review_uuid=' + spot.review_uuids[i] + '&review_filename=' + spot.review_filenames[i]+'"></a>',
+              '</span>',
+              '<span style="width:130px; height:130px; display:block; border-radius:50%; float:left; margin:3px auto">',
+              '<a href="#"><img class="upload-thumb" style="border-radius: 50%; display: block; height:100%; border:0; max-width:100%" onclick="detail_function(' + spot.review_no + ')" src="/display?review_filepath='+spot.review_filepaths[i] +'&review_uuid=' + spot.review_uuids[i+1] + '&review_filename=' + spot.review_filenames[i+1]+'"></a>',
+              '</span>',
+              '</div>',
               '       <br>',
+              '   <p style="margin-left:14px; margin-bottom:14px; font-style:oblique; font-weight:bold;">',
               ' 리뷰제목:\''+ spot.review_title +'\'',
               '   </p>',
               '</div>'
@@ -660,8 +667,8 @@ $(document).ready(function(){
           var infoWindow = new naver.maps.InfoWindow({
               content: contentString,
               disableAnchor : true,
-              borderWidth : 3,
-              maxWidth : 400
+              borderWidth : 0,
+              maxWidth :400
 
           });
 

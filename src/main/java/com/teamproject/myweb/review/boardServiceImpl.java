@@ -68,21 +68,19 @@ public class boardServiceImpl implements boardService{
 															 .review_uuid(uuid)
 															 .review_writer(vo.getReview_writer())
 															 .build();
+			System.out.println(uploadvo.toString());
 			boardmapper.reviewFileRegist(uploadvo);
 			
 		}
 	
 		
 		Review_CategoryVO vo0 = map.get(0);
-		System.out.println(vo0);
 		boardmapper.reviewCategoryRegist(vo0);
 		
 		Review_CategoryVO vo1 = map.get(1);
-		System.out.println(vo1);
 		boardmapper.reviewCategoryRegist(vo1);
 		
 		Review_CategoryVO vo2 = map.get(2);
-		System.out.println(vo2);
 		boardmapper.reviewCategoryRegist(vo2);
 		
 		
@@ -191,7 +189,34 @@ public class boardServiceImpl implements boardService{
 
 	@Override
 	public ArrayList<MainVO> getLocation() {
-		return boardmapper.getLocation();
+		ArrayList<MainVO> list = boardmapper.getLocation();
+		
+		ArrayList<MainVO> newlist =  new ArrayList<MainVO>();
+		int i = 0;
+		
+		for(MainVO vo : list) {
+			String[] review_filenames  = {list.get(i).getReview_filename() , list.get(i+1).getReview_filename()};
+			String[] review_filepaths  = {list.get(i).getReview_filepath() , list.get(i+1).getReview_filepath()};
+			String[] review_fileuuids  = {list.get(i).getReview_uuid() , list.get(i+1).getReview_uuid()};
+			
+			MainVO newvo =	MainVO.builder().review_title(list.get(i).getReview_title())
+									.review_lat(list.get(i).getReview_lat())
+									.review_lng(list.get(i).getReview_lng())
+									.review_category(list.get(i).getReview_category())
+									.review_realaddress(list.get(i).getReview_realaddress())
+									.review_filenames(review_filenames)
+									.review_filepaths(review_filepaths)
+									.review_uuids(review_fileuuids)
+									.review_no(list.get(i).getReview_no())
+									.build();
+			newlist.add(newvo);
+			
+			i++;
+			i++;
+			if(i == list.size())break;
+		}
+		
+		return newlist;
 	}
 
 	@Override

@@ -15,7 +15,7 @@
 </head>
 <body>
 
-    <div class="wrap">
+    <div class="wrap" style="border: 1px solid #777; border-radius: 25px; ">
         <div class="warp_inner">
             <div class="right_content">
                 <div class="midiaq">
@@ -37,7 +37,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th>작성자</th>
-                                                    <td><input type="text" class="inputw150" name="review_writer" th:value="${session.userVO.user_name}" disabled></td>
+                                                    <td><input type="text" class="inputw150" name="review_writer" th:value="${session.userVO.user_name}" readonly></td>
                                                 </tr>
 
                                                 <tr>

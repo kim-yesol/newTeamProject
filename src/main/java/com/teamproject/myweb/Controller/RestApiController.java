@@ -31,12 +31,6 @@ public class RestApiController {
 		return list;
 	}
 	
-	@GetMapping("/photo_category/{review_no}")
-	public ArrayList<MainVO> photo_category(@PathVariable("review_no") int review_no) {
-			
-		ArrayList<MainVO> list= boardservice.getPhoto_Category();
-		return list;
-	}
 	
 	@GetMapping("/display")
 	public byte[] display(@RequestParam("review_filename") String filename,

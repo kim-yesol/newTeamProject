@@ -296,6 +296,8 @@ public class boardController {
 	@PostMapping("/reviewForm")
 	public String reviewform(reviewVO reviewvo, RedirectAttributes RA,@RequestParam("file") List<MultipartFile> list, Review_Upload_CategoryVO category) {
 		
+		System.out.println(reviewvo.toString());
+		
 		reviewVO vo	=	reviewVO.builder().review_category(category.getReview_category_detail_nm()[0] + ">" + 
 														   category.getReview_category_detail_nm()[1] + ">" +
 														   category.getReview_category_detail_nm()[2])
@@ -308,7 +310,7 @@ public class boardController {
 										  .review_realAddress(reviewvo.getReview_realAddress())
 										  .build();
 		HashMap<Integer, Review_CategoryVO> map = new HashMap<Integer, Review_CategoryVO>();
-		
+
 
 		for(int i = 0 ; i < category.getReview_category_detail_lv().length ; i++) {
 			Review_CategoryVO voi =	Review_CategoryVO.builder().review_group(category.getReview_group()[i])
