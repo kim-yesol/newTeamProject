@@ -20,6 +20,7 @@ public class Criteria {
 	
 		
 	public Criteria(int page, int amount) {
+		super();
 		this.page = page;
 		this.amount = amount;
 		

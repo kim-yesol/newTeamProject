@@ -13,4 +13,5 @@ public interface CommentMapper {
 	public ArrayList<CommentVO> commentList(int free_bno);
 	public int commentReg(CommentVO vo);
 	public int commentDelete(int cno);
+	public int commentTotal(int free_bno);
 }

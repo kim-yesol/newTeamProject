@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.teamproject.myweb.command.freeBoardVO;
 import com.teamproject.myweb.util.Criteria;
-import com.teamproject.myweb.util.PageVO;
 
 public interface FreeBoardService {
 

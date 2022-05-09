@@ -42,10 +42,16 @@
 .commentList {
     padding-bottom: 30px;
 }
+.commentList tr {
+	border-bottom: 1px solid #999;
+}
+.commentList td {
+	padding: 0 10px;
+}
 .commentInner {
     width: 100%;
     height: 50px;
-    background-color: #f1f1f1;
+    
 }
 
 
@@ -117,8 +123,15 @@
 
 .c_writer {
 	border: none;
+	
 }
-    
+
+.commentMid {
+	height: 50px;
+	border-bottom: 1px solid #f1f1f1;
+}
+
+
     
     
     </style>
@@ -134,11 +147,16 @@
             <div class="right_content">
                 <div class="midiaq">
                         <div class="full_collum collum">
+                         <div class="freeboard-wrap">
+                 
+                        <div class="search-wrap">
+                        
+                           
+                        </div>
                             <ul>
                                 <li class="collum_tit">
-                                    <h2>게시글 상세보기</h2>
+                                    <h2>자유게시판</h2>
 
-                                    <span class="showtoggle minus"></span>
                                     <ul>
                                         <li>
                                             <table cellpadding="0" cellspacing="0" class="board_basic_view1" width="100%;">
@@ -169,15 +187,17 @@
                                                 </tr>
 
                                             </table>
-                                                  <strong>댓글목록</strong>
-                                            <hr>
+                                            <div class="commentMid">
+                                                  <strong>댓글 [[${total}]]개</strong>
+                                            
+                                            </div>
                                             <div class="commentList">
                                                 <table class="commentInner">
                                                     <tr th:each="comment : ${commentVO}">
                                                         <td class="commentWriter">[[${comment.c_writer}]]</td>
                                                         <td class="commentContent">[[${comment.c_content}]]</td>
                                                         <td class="commentDate">[[${ #temporals.format(comment.c_regdate, 'yyyy-MM-dd') }]]
-                                                        	      				<input type="button" value="삭제" style="border:none;" th:onclick="'location.href=\'' + @{/board/commentDelete(free_bno=${comment.free_bno},cno=${comment.cno})} + '\''">
+                                                        	      				<input type="button" value="삭제" style="border:none; background-color: white;" th:onclick="'location.href=\'' + @{/board/commentDelete(free_bno=${comment.free_bno},cno=${comment.cno})} + '\''">
                                                         	      				<!-- onclick="location.href='commentDelete?cno=${comment.cno}&free_bno=${comment.free_bno}'" -->
                                                         	      				<!-- th:onclick="'location.href=\'' + @{/board/commentDelete(free_bno=${commentVO.free_bno}&cno=${commentVO.cno})} + '\''" -->
                                                         </td>
@@ -193,7 +213,7 @@
                                                 	<div>
                                                 		<p>댓글 작성</p>
                                                 	</div>
-                                                    <input type="text" class="c_writer" name="c_writer" value="세션에 로그인된 유저네임">
+                                                    <input type="text" class="c_writer" name="c_writer" th:value="${session.userVO.user_name}">
                                                     <input type="hidden" name="free_bno" th:value="${detail.free_bno}">
                                                     
                                                 </div>
@@ -224,6 +244,7 @@
             </div>
         </div>
     </div>
+   </div>
 	<th:block th:replace="~{/include/footer :: f_include }"></th:block>
     <script th:inline="javascript">
 

@@ -22,10 +22,42 @@
   <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" >
   <link th:href="@{https://fonts.googleapis.com/css2?family=Lato&display=swap}" rel="stylesheet">
   <link rel="stylesheet" type="text/css" th:href="@{/css/showMoreItems-theme.min.css}" />
+  
+  <script type="text/javascript">
+	  
+	  
+	  function getCookie(name){
+		  
+		  var cookie = document.cookie;
+		  if(document.cookie != ""){
+			  var cookie_array = cookie.split("; ");
+			  for (var i in cookie_array){
+				  var cookie_name = cookie_array[i].split("=");
+				  
+				  if(cookie_name[0] == "popupClose"){
+					  return cookie_name[1]; /* N */
+				  }
+			  }
+		  }
+		  return "";
+	  };
+	  
+	  
+	  function popUp(url) {
+	 	var cookieCheck = getCookie("popupClose");
+	 	var userVO = '[[${session.userVO}]]';
+	 	/* userVO가 공백이 아니고, cookie가 N이 아닐때 팝업호출 */
+	 	if(userVO != "" & cookieCheck != "N"){
+	 	 	window.open(url, "examine", "width=650, height=800, left=300, top=100");
+	 		  
+	 	}
+	  }
+	
+  </script>
 
 </head>
-<body>
-
+<body onload="javascript:popUp('/user/examine')">
+<iframe name="hframe4" style="display: none;"></iframe>
 <th:block th:replace="~{/include/header :: h_include }"></th:block>
 
 <div class="weekly-outer">
@@ -590,9 +622,7 @@ function food_check(){
 	if(this.checked){
 		console.log(1);
 	}
-}
-
-
+};
 
 $(document).ready(function(){
 
@@ -801,6 +831,16 @@ function hideMarker(map, marker) {
   });
   
 });
+
+
+(function() {
+	var msg = JSON.parse('[[${msg}]]');	
+	if(msg != null) {
+		alert(msg);
+	}
+})();
+	
+
   
 
   

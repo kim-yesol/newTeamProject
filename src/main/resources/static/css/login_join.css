@@ -166,11 +166,12 @@
   
   .top p a {
     font-size: 14px;
-    
     color: #111;
-  
   }
   
+  input[type="checkbox"]{
+    margin: 5px;
+  }
   .joinheader, .findIdHeader {
     text-align: left;
     margin: 100px 0;
@@ -239,6 +240,11 @@
     width: 350px;
     height: 40px;
     box-shadow: 5px 10px rgb(241 241 241)
+  }
+  
+  .joinform ul > li > input[name="exam6"]{
+  	width: auto;
+  	height: auto;
   }
   
   #gender:hover, .joinform ul > li > input:hover,
