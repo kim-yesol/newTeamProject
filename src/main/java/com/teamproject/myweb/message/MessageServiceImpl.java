@@ -30,8 +30,14 @@ public class MessageServiceImpl implements MessageService{
 	}
 
 	@Override
-	public MessageVO getDetail(int mno) {
-		return messageMapper.getDetail(mno);
+	public MessageVO getReceiveDetail(int mno) {
+		return messageMapper.getReceiveDetail(mno);
+	}
+	
+
+	@Override
+	public MessageVO getSendDetail(int mno) {
+		return messageMapper.getSendDetail(mno);
 	}
 
 	@Override
@@ -54,10 +60,11 @@ public class MessageServiceImpl implements MessageService{
 		return messageMapper.getReceiveTotal(sender);
 	}
 
-//	@Override
-//	public int update(MessageVO vo) {
-//		return messageMapper.update(vo);
-//	}
+	@Override
+	public int update(int mno) {
+		return messageMapper.update(mno);
+	}
+
 
 	
 

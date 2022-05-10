@@ -8,11 +8,13 @@
 	<insert id="write">
 		insert into message(mreceiver,
 							msender,
-							mcontent
+							mcontent,
+							mcheck
 							)
 		values(#{mreceiver},
 			   #{msender},
-			   #{mcontent})	
+			   #{mcontent},
+			   0)	
 	</insert>
 	
 	<select id="getList" resultType="MessageVO">
@@ -41,7 +43,11 @@
 		select count(*) from message where mreceiver = #{sender}
 	</select>
 	
-	<select id="getDetail" resultType="MessageVO">
+	<select id="getReceiveDetail" resultType="MessageVO">
+		select * from message where mno = #{mno} 
+	</select>
+	
+	<select id="getSendDetail" resultType="MessageVO">
 		select * from message where mno = #{mno} 
 	</select>
 	
@@ -51,7 +57,7 @@
 	
 	<update id="update">
 		update message 
-		set mopendate = #{mopendate}
+		set mcheck = 1 where mno = #{mno}
 	</update>
 	
 </mapper>

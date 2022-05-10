@@ -48,9 +48,10 @@
         		
                 <ul class="inner" th:each="vo, state : ${senderList}">
                 	<li>TO. [[${vo.mreceiver}]]</li>
-                	<li>안읽음</li>
+                	<li th:if="${vo.mcheck} == 1" >읽음</li>
+                	<li th:unless="${vo.mcheck}" style="color: red">안읽음</li>
                 	<li class="right">[[${ #temporals.format(vo.msenddate, 'yyyy-MM-dd hh:mm:ss')}]]</li><br>
-                	<li><a th:href="@{/message/messageDetail(mno=${vo.mno})}">[[${vo.mcontent}]]</a></li>
+                	<li><a th:href="@{/message/messageSendDetail(mno=${vo.mno})}">[[${vo.mcontent}]]</a></li>
                 	<!-- 보낸메세지 상세보기-->
             	</ul>
             	

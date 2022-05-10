@@ -23,7 +23,7 @@
             	<div class="innerbottom">
                 	<button type="button" class="messageBtn" onclick="location.href='messageReply'">재전송하기</button>
                 	<!-- 내가 보냈던사람에게 다시쓰기 -->
-                	<button type="button" class="messageBtn" th:onclick="|location.href='@{deleteSendMessage(mno=${mesVO.mno})}'|">삭제</button>
+                	<button type="button" class="messageBtn" th:onclick="|message_delete()|">삭제</button>
                 	<button type="button" class="messageBtn" onclick="location.href='messageSendList'">목록</button>
             	</div>
         	</div>
@@ -31,4 +31,15 @@
     </form>
     
 </body>
+
+<script th:inline="javascript">
+	function message_delete() {
+		this.event.preventDefault(); //고유이벤트 중지
+	
+		if(confirm("메시지를 삭제 하시겠습니까?")) {
+			document.messageDetail.action = "deleteSendMessage";
+			document.messageDetail.submit();
+		}
+	}
+</script>
 </html>

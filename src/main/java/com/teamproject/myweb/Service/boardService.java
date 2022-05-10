@@ -30,7 +30,7 @@ public interface boardService {
 	
 	public ArrayList<MainVO> getLocation();
 	
-	public UserVO userCheckes(UserCheckVO vo);
+
 	
 	public ArrayList<Review_uploadVO> getImg(int review_no);
 }

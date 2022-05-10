@@ -115,10 +115,7 @@ public class boardServiceImpl implements boardService{
 		return boardmapper.getLocation();
 	}
 
-	@Override
-	public UserVO userCheckes(UserCheckVO vo) {
-		return boardmapper.userCheckes(vo);
-	}
+	
 
 	@Override
 	public ArrayList<Review_uploadVO> getImg(int review_no) {

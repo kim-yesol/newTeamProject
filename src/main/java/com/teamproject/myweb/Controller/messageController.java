@@ -53,7 +53,7 @@ public class messageController {
 		cri.setPagee((cri.getPage() - 1) * cri.getAmount());
 		ArrayList<MessageVO> list = messageService.getList("세션에아이디", cri);
 		
-		System.out.println(cri.toString());
+		System.out.println(list.toString());
 		model.addAttribute("senderList", list);
 		model.addAttribute("sendpageVO", sendpageVO);
 		
@@ -61,23 +61,26 @@ public class messageController {
 	}
 	
 	//보낸메시지 상세
-	@GetMapping("/messageDetail")
+	@GetMapping("/messageSendDetail")
 	public String messageDetail(@RequestParam("mno") int mno,
 								Model model) {
 		
-		MessageVO mesVO = messageService.getDetail(mno);
+		MessageVO mesVO = messageService.getSendDetail(mno);
 		model.addAttribute("mesVO", mesVO);
 		
 		return "message/messageDetail";
 	}
 	
-	@GetMapping("/messageReceive")
+	@GetMapping("/messageReceiveDetail")
 	public String messageReceive(@RequestParam("mno") int mno,
 								 Model model) {
 		
-		MessageVO mesVO = messageService.getDetail(mno);
+		messageService.update(mno);
+		
+		MessageVO mesVO = messageService.getReceiveDetail(mno);
 		model.addAttribute("mesVO", mesVO);
 		
+
 		return "message/messageReceive";
 	}
 	
@@ -99,7 +102,7 @@ public class messageController {
 		
 		messageService.write(vo);
 		
-		return "redirect:/message/messageList";
+		return "redirect:/message/messageSendList";
 	}
 	
 	//삭제
@@ -124,12 +127,15 @@ public class messageController {
 		int result = messageService.delete(mno);
 		
 		if(result == 1) {
-			RA.addFlashAttribute("msg", "삭제 되었습니다");
+			RA.addFlashAttribute("msg", "메시지가 삭제 되었습니다");
 		} else {
-			RA.addFlashAttribute("msg", "삭제에 실패했습니다");
+			RA.addFlashAttribute("msg", "메시지 삭제에 실패했습니다");
 		}
+		
+		System.out.println(result);
 		
 		return "redirect:/message/messageSendList";
 	}
+
 	
 }

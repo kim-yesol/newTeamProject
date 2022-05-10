@@ -20,7 +20,7 @@ public class InterceptorConfig implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		
 		registry.addInterceptor( checkHandler() )
-				.addPathPatterns("/user/*")
+//				.addPathPatterns("/user/*")
 				.addPathPatterns("/board/review*")
 				.excludePathPatterns("/board/reviewBoard")
 				.excludePathPatterns("/board/reviewDetail")

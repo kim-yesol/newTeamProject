@@ -112,10 +112,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM REVIEWBOARD
 	</select>
 	
-	<select id="userCheckes" resultType="UserVO">
-		SELECT * FROM USER
-		WHERE USER_ID = #{user_id} AND USER_PW = #{user_pw};
-	</select>
+	
 	
 	<select id="getImg" resultType="Review_uploadVO">
 		SELECT * FROM REVIEW_UPLOAD

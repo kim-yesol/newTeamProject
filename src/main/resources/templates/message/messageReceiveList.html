@@ -24,9 +24,8 @@
         	
             <ul class="inner" th:each="vo, state : ${receiveList}">
                 <li>FROM. [[${vo.msender}]]</li>
-                <li>안읽음</li>
                 <li class="right">[[${ #temporals.format(vo.msenddate, 'yyyy-MM-dd hh:mm:ss')}]]</li><br>
-                <li><a th:href="@{/message/messageReceive(mno=${vo.mno})}">[[${vo.mcontent}]]</a></li>
+                <li><a th:href="@{/message/messageReceiveDetail(mno=${vo.mno})}">[[${vo.mcontent}]]</a></li>
             </ul>
             
             <div class="page_wrap">
