@@ -20,6 +20,7 @@ public class MainVO {
 	private String review_filename;
 	private String review_filepath;
 	private String review_uuid;
+	private String review_group;
 	private String[] review_filenames;
 	private String[] review_filepaths;
 	private String[] review_uuids;

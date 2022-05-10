@@ -658,7 +658,7 @@ var order_select2 = [
     	for(var index in korea){
 			if($(e.target).val() == korea[index]){
 				if($(e.target).val() == '서울'){
-					$(e.target).parent().find("input[name='review_group']").val("A");					
+					$(e.target).parent().find("input[name='review_group']").val("A");
 				} else if($(e.target).val() == '부산'){
 					$(e.target).parent().find("input[name='review_group']").val("B");
 				} else if($(e.target).val() == '대구'){

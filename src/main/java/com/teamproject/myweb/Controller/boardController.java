@@ -296,10 +296,8 @@ public class boardController {
 	@PostMapping("/reviewForm")
 	public String reviewform(reviewVO reviewvo, RedirectAttributes RA,@RequestParam("file") List<MultipartFile> list, Review_Upload_CategoryVO category) {
 		
-		System.out.println(reviewvo.toString());
-		
-		reviewVO vo	=	reviewVO.builder().review_category(category.getReview_category_detail_nm()[0] + ">" + 
-														   category.getReview_category_detail_nm()[1] + ">" +
+		reviewVO vo	=	reviewVO.builder().review_category(category.getReview_category_detail_nm()[0] + " > " + 
+														   category.getReview_category_detail_nm()[1] + " > " +
 														   category.getReview_category_detail_nm()[2])
 										  .review_content(reviewvo.getReview_content())
 										  .review_writer(reviewvo.getReview_writer())
@@ -357,7 +355,6 @@ public class boardController {
 		cri.setLeftpage((cri.getPage() -1) * cri.getAmount());
 		ArrayList<DebateVO>list = debateService.getList(cri);
 		
-		System.out.println(cri.toString());
 		model.addAttribute("list", list);
 		model.addAttribute("pageVO", pageVO);
 		
@@ -374,7 +371,6 @@ public class boardController {
 	public String debateForm(DebateVO vo,
 							 RedirectAttributes RA) {
 		int result =  debateService.regist(vo);
-		System.out.println(result);
 		
 		if(result == 1) {
 			RA.addFlashAttribute("msg", "게시글이 등록되었습니다");
@@ -391,7 +387,6 @@ public class boardController {
 		
 		DebateVO debateVO = debateService.getDetail(debate_no);
 		model.addAttribute("debateVO", debateVO);
-		System.out.println(debateVO.toString());
 		
 //		ArrayList<DebateVO> list = debateService.getList();
 //		model.addAttribute("list", list);

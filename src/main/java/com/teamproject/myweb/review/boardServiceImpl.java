@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-import javax.swing.text.DateFormatter;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +54,8 @@ public class boardServiceImpl implements boardService{
 			
 			String savename = uploadpath + "\\" + filepath + "\\" + uuid + "_" + filename;
 			
+			System.out.println(savename);
+			
 			File file = new File(savename);
 			
 			try {
@@ -68,7 +69,6 @@ public class boardServiceImpl implements boardService{
 															 .review_uuid(uuid)
 															 .review_writer(vo.getReview_writer())
 															 .build();
-			System.out.println(uploadvo.toString());
 			boardmapper.reviewFileRegist(uploadvo);
 			
 		}
@@ -150,7 +150,6 @@ public class boardServiceImpl implements boardService{
 															 .review_no(vo.getReview_no())
 															 .review_upload_no(file_list.get(file_i))
 															 .build();
-			System.out.println(uploadvo.toString());
 			boardmapper.reviewFileUpdate(uploadvo);
 			file_i++;
 			
@@ -173,7 +172,6 @@ public class boardServiceImpl implements boardService{
 								.review_category_no(Category_list.get(i))
 								.build();
 		
-			System.out.println(voi.toString());
 			boardmapper.reviewCategoryUpdate(voi);
 		}
 		
@@ -195,22 +193,47 @@ public class boardServiceImpl implements boardService{
 		int i = 0;
 		
 		for(MainVO vo : list) {
-			String[] review_filenames  = {list.get(i).getReview_filename() , list.get(i+1).getReview_filename()};
-			String[] review_filepaths  = {list.get(i).getReview_filepath() , list.get(i+1).getReview_filepath()};
-			String[] review_fileuuids  = {list.get(i).getReview_uuid() , list.get(i+1).getReview_uuid()};
+			System.out.println("i의값추적:" + i);
+			System.out.println();
+			if(list.get(i).getReview_filename() == null) {
+				String[] review_filenames  = {"",""};
+				String[] review_filepaths  = {"",""};
+				String[] review_fileuuids  = {"",""};
+				MainVO newvo =	MainVO.builder().review_title(list.get(i).getReview_title())
+						.review_lat(list.get(i).getReview_lat())
+						.review_lng(list.get(i).getReview_lng())
+						.review_category(list.get(i).getReview_category())
+						.review_realaddress(list.get(i).getReview_realaddress())
+						.review_filenames(review_filenames)
+						.review_filepaths(review_filepaths)
+						.review_uuids(review_fileuuids)
+						.review_no(list.get(i).getReview_no())
+						.build();
+				newlist.add(newvo);
+				i++;
+				if(i == list.size())break;
+				continue;
+			} else {
+				String[] review_filenames  = {list.get(i).getReview_filename() , list.get(i+1).getReview_filename()};
+				String[] review_filepaths  = {list.get(i).getReview_filepath() , list.get(i+1).getReview_filepath()};
+				String[] review_fileuuids  = {list.get(i).getReview_uuid() , list.get(i+1).getReview_uuid()};
+				
+				
+				MainVO newvo =	MainVO.builder().review_title(list.get(i).getReview_title())
+						.review_lat(list.get(i).getReview_lat())
+						.review_lng(list.get(i).getReview_lng())
+						.review_category(list.get(i).getReview_category())
+						.review_realaddress(list.get(i).getReview_realaddress())
+						.review_filenames(review_filenames)
+						.review_filepaths(review_filepaths)
+						.review_uuids(review_fileuuids)
+						.review_no(list.get(i).getReview_no())
+						.review_group(list.get(i).getReview_group())
+						.build();				
+				newlist.add(newvo);
+			}
 			
-			MainVO newvo =	MainVO.builder().review_title(list.get(i).getReview_title())
-									.review_lat(list.get(i).getReview_lat())
-									.review_lng(list.get(i).getReview_lng())
-									.review_category(list.get(i).getReview_category())
-									.review_realaddress(list.get(i).getReview_realaddress())
-									.review_filenames(review_filenames)
-									.review_filepaths(review_filepaths)
-									.review_uuids(review_fileuuids)
-									.review_no(list.get(i).getReview_no())
-									.build();
-			newlist.add(newvo);
-			
+
 			i++;
 			i++;
 			if(i == list.size())break;

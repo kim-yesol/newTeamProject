@@ -38,14 +38,26 @@ public class RestApiController {
 						  @RequestParam("review_filepath") String filepath) {
 		
 		//System.out.println(filepath + "\\" + uuid + "_" + filename);
-		
-		File file = new File(uploadpath + "\\" + filepath + "\\" + uuid + "_" + filename);
-		
 		byte[] result = null;
-		try {
-			result = FileCopyUtils.copyToByteArray(file);
-		} catch (IOException e) {
-			e.printStackTrace();
+		
+
+		if(filename == "") {
+			File file = new File(uploadpath + "\\upload_fail\\upload.jpg");
+			
+			try {
+				result = FileCopyUtils.copyToByteArray(file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}  else {			
+			File file = new File(uploadpath + "\\" + filepath + "\\" + uuid + "_" + filename);
+			
+			try {
+				result = FileCopyUtils.copyToByteArray(file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return result;
