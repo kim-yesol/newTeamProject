@@ -651,12 +651,14 @@ var order_select2 = [
     $("#category_select1").on('change', function(e){
     	if($(e.target).parent().next().find("select")[0].length > 1){
     		$(e.target).parent().next().find("select")[0].length = 1;
+    		
     	}
     	if($(e.target).parent().next().next().find("select")[0].length > 1){
     		$(e.target).parent().next().next().find("select")[0].length = 1;
     	}
     	for(var index in korea){
 			if($(e.target).val() == korea[index]){
+				
 				if($(e.target).val() == '서울'){
 					$(e.target).parent().find("input[name='review_group']").val("A");
 				} else if($(e.target).val() == '부산'){
@@ -708,7 +710,6 @@ var order_select2 = [
     });	
 	
 	$("#category_select3").on('change', function(e){
-		console.log(citys)
 		for(var index in citys){
 			if($(e.target).val() == citys[index]){
 				$(e.target).parent().find("input[name='review_group']").val($(e.target).parent().prev().prev().find("input[name='review_group']").val());
@@ -718,6 +719,11 @@ var order_select2 = [
 		}
 	});
 	
+	$("#category_select4").on('change',function(e){
+		$("input[name='review_theme']")[0].value = $(e.target)[0].value;
+		console.log($("input[name='review_theme']")[0].value);
+
+	})
 	
 						
 		

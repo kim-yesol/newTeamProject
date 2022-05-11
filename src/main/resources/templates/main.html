@@ -26,7 +26,7 @@
 </head>
 <body>
 
-<th:block th:replace="~{/include/header :: h_include }"></th:block>
+<th:block th:replace="~{./include/header :: h_include }"></th:block>
 
 <div class="weekly-outer">
   <div class="weekly-content">
@@ -132,37 +132,29 @@
   <div class="taste-middle2">
       <div class="taste-sidecheck">
           <div>
-              <span style="font-size: 20px; font-weight: bold;">음식 종류</span>
+              <span style="font-size: 20px; font-weight: bold;">여행테마</span>
           </div>
           <div>
-              <input type="checkbox" name="checkbox1" id="checkbox1" value="한식">
+              <input type="checkbox" name="checkbox1_1" id="checkbox1" value="a" checked>
               <label for="checkbox1">
                   <div>
-                      <span>한식</span>
+                      <span>맛집탐방</span>
                   </div>
               </label>
           </div>
           <div>
-              <input type="checkbox" name="checkbox1" id="checkbox2"  value="중식">
+              <input type="checkbox" name="checkbox1_1" id="checkbox2"  value="b">
               <label for="checkbox2">
                   <div>
-                      <span>중식</span>
+                      <span>자유여행</span>
                   </div>
               </label>
           </div>
           <div>
-              <input type="checkbox" name="checkbox1" id="checkbox3" >
+              <input type="checkbox" name="checkbox1_1" id="checkbox3" value="c">
               <label for="checkbox3">
                   <div>
-                      <span>일식</span>
-                  </div>
-              </label>
-          </div>
-          <div>
-              <input type="checkbox" name="checkbox1" id="checkbox4" >
-              <label for="checkbox4">
-                  <div>
-                      <span>양식</span>
+                      <span>액티비티</span>
                   </div>
               </label>
           </div>
@@ -173,7 +165,7 @@
             <span style="font-size: 20px; font-weight: bold;">지역</span>
           </div>
           <div>
-              <input type="checkbox" name="checkbox1" id="checkbox5">
+              <input type="checkbox" name="checkbox1_2" id="checkbox5" value="A">
               <label for="checkbox5">
                   <div>
                       <span>서울</span>
@@ -181,7 +173,7 @@
               </label>
           </div>
           <div>
-              <input type="checkbox" name="checkbox1" id="checkbox6">
+              <input type="checkbox" name="checkbox1_2" id="checkbox6" value="B">
               <label for="checkbox6">
                   <div>
                       <span>경기</span>
@@ -189,7 +181,7 @@
               </label>
           </div>
           <div>
-              <input type="checkbox" name="checkbox1" id="checkbox7">
+              <input type="checkbox" name="checkbox1_2" id="checkbox7" value="C">
               <label for="checkbox7">
                   <div>
                       <span>강원</span>
@@ -197,7 +189,7 @@
               </label>
           </div>
           <div>
-              <input type="checkbox" name="checkbox1" id="checkbox8">
+              <input type="checkbox" name="checkbox1_2" id="checkbox8" value="D">
               <label for="checkbox8">
                   <div>
                       <span>부산</span>
@@ -275,6 +267,33 @@
           <div>
             <span style="font-size: 20px; font-weight: bold;">지역</span>
           </div>
+          <div>
+              <input type="radio" name="checkbox1_1" id="checkbox1" value="a" >
+              <label for="checkbox1">
+                  <div>
+                      <span>맛집탐방</span>
+                  </div>
+              </label>
+          </div>
+          <div>
+              <input type="checkbox" name="checkbox1_1" id="checkbox2"  value="b" checked>
+              <label for="checkbox2">
+                  <div>
+                      <span>자유여행</span>
+                  </div>
+              </label>
+          </div>
+          <div>
+              <input type="checkbox" name="checkbox1_1" id="checkbox3" value="c">
+              <label for="checkbox3">
+                  <div>
+                      <span>액티비티</span>
+                  </div>
+              </label>
+          </div>
+          
+          <hr>
+                    
           <div>
               <input type="checkbox" name="" id="checkbox9">
               <label for="checkbox9">
@@ -375,37 +394,26 @@
   <div class="taste-middle2">
       <div class="taste-sidecheck">
           <div>
-              <span style="font-size: 20px; font-weight: bold;">레저스포츠</span>
-          </div>
-          <div>
-              <input type="checkbox" name="" id="checkbox13">
-              <label for="checkbox13">
+              <input type="checkbox" name="checkbox1_1" id="checkbox1" value="a" >
+              <label for="checkbox1">
                   <div>
-                      <span>스카이다이빙</span>
+                      <span>맛집탐방</span>
                   </div>
               </label>
           </div>
           <div>
-              <input type="checkbox" name="" id="checkbox14">
-              <label for="checkbox14">
+              <input type="checkbox" name="checkbox1_1" id="checkbox2"  value="b">
+              <label for="checkbox2">
                   <div>
-                      <span>래프팅</span>
+                      <span>자유여행</span>
                   </div>
               </label>
           </div>
           <div>
-              <input type="checkbox" name="" id="checkbox15">
-              <label for="checkbox15">
+              <input type="checkbox" name="checkbox1_1" id="checkbox3" value="c" checked>
+              <label for="checkbox3">
                   <div>
-                      <span>수상스키</span>
-                  </div>
-              </label>
-          </div>
-          <div>
-              <input type="checkbox" name="" id="checkbox16">
-              <label for="checkbox16">
-                  <div>
-                      <span>서핑</span>
+                      <span>액티비티</span>
                   </div>
               </label>
           </div>
@@ -506,8 +514,8 @@
       </div>
   </div>
 </div>
-<th:block th:replace="~{/include/footer :: f_include }"></th:block>
-<script>
+<th:block th:replace="~{./include/footer :: f_include }"></th:block>
+<script th:inline:"javascript">
   // 아이콘 클릭시 해당 클래스가 보여지면서 위치로가기
   var tasteImg = document.getElementById("tasteImg");
   var outer = document.querySelector(".taste-middle-outer")
@@ -518,7 +526,10 @@
 
   tasteImg.onclick = function() {
     outer.style.display = "block";
-
+	var theme = 'a';
+		$.getJSON("../getFirstCategory?review_theme=" + theme ,function(data){
+			console.log(data);
+		});
     if(outer2.style.display = "block") {
       outer2.style.display = "none"
     }
@@ -531,7 +542,10 @@
 
   locaImg.onclick = function() {
     outer2.style.display = "block";
-
+	var theme = 'b';
+		$.getJSON("../getFirstCategory?review_theme=" + theme ,function(data){
+			console.log(data);
+		});	
     if(outer.style.display = "block") {
       outer.style.display = "none"
     }
@@ -544,7 +558,10 @@
 
   playImg.onclick = function() {
     outer3.style.display = "block";
-
+	var theme = 'c';
+		$.getJSON("../getFirstCategory?review_theme=" + theme ,function(data){
+			console.log(data);
+		});
     if(outer2.style.display = "block") {
       outer2.style.display = "none"
     }
@@ -590,9 +607,12 @@
 
 
 $("input[type='checkbox']").on('change', function(e){
-	$("input[name='checkbox1']:checked").each(function(i,val){
-		console.log(val);
-	});
+	for(var i =0 ; i < $("input[name='checkbox1_1']:checked").length ; i++){
+		console.log($("input[name='checkbox1_1']:checked")[i].value);
+	}
+	for(var i =0 ; i < $("input[name='checkbox1_2']:checked").length ; i++){
+		console.log($("input[name='checkbox1_2']:checked")[i].value);
+	}
 });
 
 

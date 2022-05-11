@@ -306,6 +306,7 @@ public class boardController {
 										  .review_title(reviewvo.getReview_title())
 										  .review_content(reviewvo.getReview_content())
 										  .review_realAddress(reviewvo.getReview_realAddress())
+										  .review_theme(reviewvo.getReview_theme())
 										  .build();
 		HashMap<Integer, Review_CategoryVO> map = new HashMap<Integer, Review_CategoryVO>();
 

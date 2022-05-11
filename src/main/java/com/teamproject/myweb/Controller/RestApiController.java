@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.teamproject.myweb.command.MainVO;
+import com.teamproject.myweb.command.reviewVO;
 import com.teamproject.myweb.review.boardService;
 
 @RestController
@@ -28,6 +29,14 @@ public class RestApiController {
 	public ArrayList<MainVO> getLocation() {
 			
 		ArrayList<MainVO> list= boardservice.getLocation();
+		return list;
+	}
+	
+	@GetMapping("/getFirstCategory")
+	public ArrayList<MainVO> getFirstCategory(@RequestParam("review_theme") String review_theme) {
+		
+		ArrayList<MainVO> list = boardservice.getFirstCategory(review_theme);
+
 		return list;
 	}
 	

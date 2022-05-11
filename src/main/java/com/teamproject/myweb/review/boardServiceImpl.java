@@ -40,6 +40,8 @@ public class boardServiceImpl implements boardService{
 	@Override
 	public int reviewRegist(reviewVO vo, List<MultipartFile> list, HashMap<Integer, Review_CategoryVO> map) {
 		
+		System.out.println(vo.toString());
+		
 		int result = boardmapper.reviewRegist(vo);
 		
 		for(MultipartFile f : list) {
@@ -193,8 +195,6 @@ public class boardServiceImpl implements boardService{
 		int i = 0;
 		
 		for(MainVO vo : list) {
-			System.out.println("i의값추적:" + i);
-			System.out.println();
 			if(list.get(i).getReview_filename() == null) {
 				String[] review_filenames  = {"",""};
 				String[] review_filepaths  = {"",""};
@@ -274,8 +274,45 @@ public class boardServiceImpl implements boardService{
 
 	@Override
 	public ArrayList<MainVO> getPhoto_Category() {
-		return boardmapper.getPhoto_Category();
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public ArrayList<MainVO> getFirstCategory(String review_theme) {
+		
+		ArrayList<MainVO> list = boardmapper.getFirstCategory(review_theme);
+		
+		ArrayList<MainVO> newlist =  new ArrayList<MainVO>();
+		int i = 0;
+		
+		for(MainVO vo : list) {
+			String[] review_filenames  = {list.get(i).getReview_filename() , list.get(i+1).getReview_filename()};
+			String[] review_filepaths  = {list.get(i).getReview_filepath() , list.get(i+1).getReview_filepath()};
+			String[] review_fileuuids  = {list.get(i).getReview_uuid() , list.get(i+1).getReview_uuid()};
+			
+			
+			MainVO newvo =	MainVO.builder().review_title(list.get(i).getReview_title())
+					.review_lat(list.get(i).getReview_lat())
+					.review_lng(list.get(i).getReview_lng())
+					.review_category(list.get(i).getReview_category())
+					.review_realaddress(list.get(i).getReview_realaddress())
+					.review_filenames(review_filenames)
+					.review_filepaths(review_filepaths)
+					.review_uuids(review_fileuuids)
+					.review_no(list.get(i).getReview_no())
+					.review_group(list.get(i).getReview_group())
+					.review_theme(review_theme)
+					.build();				
+			newlist.add(newvo);
+			i++;
+			i++;
+			if(i == list.size())break;
+		}
+		
+		return newlist;
+	}
+
 	
 	
 	

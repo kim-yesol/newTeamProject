@@ -46,4 +46,6 @@ public interface boardService {
 	public ArrayList<Review_uploadVO> getUploadList(int review_no);
 	
 	public ArrayList<Review_CategoryVO> getCategory(int review_no);
+	
+	public ArrayList<MainVO> getFirstCategory(String review_theme);
 }

@@ -57,4 +57,6 @@ public interface boardMapper {
 	public ArrayList<Integer> getUploadPrimeKey(int review_no);
 	
 	public ArrayList<Integer> getCategoryPrimeKey(int review_no);
+	
+	public ArrayList<MainVO> getFirstCategory(String review_theme);
 }
