@@ -1,14 +1,11 @@
-package com.teamproject.myweb.review;
+package com.teamproject.myweb.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import com.teamproject.myweb.command.MainVO;
-import com.teamproject.myweb.command.Review_CategoryVO;
-import com.teamproject.myweb.command.Review_Upload_CategoryVO;
 import com.teamproject.myweb.command.Review_uploadVO;
 import com.teamproject.myweb.command.UserCheckVO;
 import com.teamproject.myweb.command.UserVO;
@@ -19,7 +16,7 @@ import com.teamproject.myweb.util.review_Criteria;
 
 public interface boardService {
 	
-	public int reviewRegist(reviewVO vo, List<MultipartFile> list,HashMap<Integer, Review_CategoryVO> map);
+	public int reviewRegist(reviewVO vo, List<MultipartFile> list);
 	
 	public ArrayList<reviewVO> reviewList(review_Criteria cri);
 	
@@ -27,25 +24,13 @@ public interface boardService {
 	
 	public reviewVO getDetail(int review_no);
 	
-	public int updateReview(reviewVO vo, List<MultipartFile> list,HashMap<Integer, Review_Upload_CategoryVO> map);
+	public int updateReview(reviewVO vo);
 	
 	public int deleteReview(int review_no);
 	
-	public int deletePhoto(Review_uploadVO vo);
-	
-	public int deleteCategory(Review_CategoryVO vo);
-	
 	public ArrayList<MainVO> getLocation();
 	
-	public ArrayList<MainVO> getPhoto_Category();
-	
-	public UserVO userCheckes(UserCheckVO vo);
+
 	
 	public ArrayList<Review_uploadVO> getImg(int review_no);
-	
-	public ArrayList<Review_uploadVO> getUploadList(int review_no);
-	
-	public ArrayList<Review_CategoryVO> getCategory(int review_no);
-	
-	public ArrayList<MainVO> getFirstCategory(String review_theme);
 }
