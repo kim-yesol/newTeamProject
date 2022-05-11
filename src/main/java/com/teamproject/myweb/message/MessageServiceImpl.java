@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.teamproject.myweb.command.MessageVO;
-import com.teamproject.myweb.util.message_Criteria;
+import com.teamproject.myweb.util.Criteria;
 
 @Service("messageService")
 public class MessageServiceImpl implements MessageService{
@@ -25,17 +25,23 @@ public class MessageServiceImpl implements MessageService{
 	}
 	
 	@Override
-	public ArrayList<MessageVO> getList(String sender, message_Criteria cri) {
+	public ArrayList<MessageVO> getList(String sender, Criteria cri) {
 		return messageMapper.getList(sender, cri);
 	}
 
 	@Override
-	public MessageVO getDetail(int mno) {
-		return messageMapper.getDetail(mno);
+	public MessageVO getReceiveDetail(int mno) {
+		return messageMapper.getReceiveDetail(mno);
+	}
+	
+
+	@Override
+	public MessageVO getSendDetail(int mno) {
+		return messageMapper.getSendDetail(mno);
 	}
 
 	@Override
-	public ArrayList<MessageVO> re_getList(String sender, message_Criteria cri) {
+	public ArrayList<MessageVO> re_getList(String sender, Criteria cri) {
 		return messageMapper.re_getList(sender, cri);
 	}
 
@@ -54,10 +60,11 @@ public class MessageServiceImpl implements MessageService{
 		return messageMapper.getReceiveTotal(sender);
 	}
 
-//	@Override
-//	public int update(MessageVO vo) {
-//		return messageMapper.update(vo);
-//	}
+	@Override
+	public int update(int mno) {
+		return messageMapper.update(mno);
+	}
+
 
 	
 
