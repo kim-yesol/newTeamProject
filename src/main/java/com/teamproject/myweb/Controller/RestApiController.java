@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.teamproject.myweb.command.MainVO;
+import com.teamproject.myweb.command.reviewVO;
 import com.teamproject.myweb.review.boardService;
 
 @RestController
@@ -31,12 +32,14 @@ public class RestApiController {
 		return list;
 	}
 	
-	@GetMapping("/photo_category/{review_no}")
-	public ArrayList<MainVO> photo_category(@PathVariable("review_no") int review_no) {
-			
-		ArrayList<MainVO> list= boardservice.getPhoto_Category();
+	@GetMapping("/getFirstCategory")
+	public ArrayList<MainVO> getFirstCategory(@RequestParam("review_theme") String review_theme) {
+		
+		ArrayList<MainVO> list = boardservice.getFirstCategory(review_theme);
+
 		return list;
 	}
+	
 	
 	@GetMapping("/display")
 	public byte[] display(@RequestParam("review_filename") String filename,
@@ -44,14 +47,26 @@ public class RestApiController {
 						  @RequestParam("review_filepath") String filepath) {
 		
 		//System.out.println(filepath + "\\" + uuid + "_" + filename);
-		
-		File file = new File(uploadpath + "\\" + filepath + "\\" + uuid + "_" + filename);
-		
 		byte[] result = null;
-		try {
-			result = FileCopyUtils.copyToByteArray(file);
-		} catch (IOException e) {
-			e.printStackTrace();
+		
+
+		if(filename == "") {
+			File file = new File(uploadpath + "\\upload_fail\\upload.jpg");
+			
+			try {
+				result = FileCopyUtils.copyToByteArray(file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}  else {			
+			File file = new File(uploadpath + "\\" + filepath + "\\" + uuid + "_" + filename);
+			
+			try {
+				result = FileCopyUtils.copyToByteArray(file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return result;

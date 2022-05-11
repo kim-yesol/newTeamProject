@@ -122,6 +122,14 @@
 
        map.addListener('click', function (e) {
          var latlng = e.coord;
+         console.log(latlng.x);
+         if(latlng.x > 129.5 || latlng.x <126){
+				alert("여행가능 범위내에서 선택해주시기 바랍니다");
+				return;
+			} else if(latlng.y >38.5 || latlng.y < 33){
+				alert("여행가능 범위내에서 선택해주시기 바랍니다");
+				return;
+			}
          searchCoordinateToAddress(e.coord);
        });
 

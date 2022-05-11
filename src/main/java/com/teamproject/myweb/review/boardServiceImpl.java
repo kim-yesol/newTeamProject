@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-import javax.swing.text.DateFormatter;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +40,8 @@ public class boardServiceImpl implements boardService{
 	@Override
 	public int reviewRegist(reviewVO vo, List<MultipartFile> list, HashMap<Integer, Review_CategoryVO> map) {
 		
+		System.out.println(vo.toString());
+		
 		int result = boardmapper.reviewRegist(vo);
 		
 		for(MultipartFile f : list) {
@@ -54,6 +55,8 @@ public class boardServiceImpl implements boardService{
 			String uuid = UUID.randomUUID().toString();
 			
 			String savename = uploadpath + "\\" + filepath + "\\" + uuid + "_" + filename;
+			
+			System.out.println(savename);
 			
 			File file = new File(savename);
 			
@@ -74,15 +77,12 @@ public class boardServiceImpl implements boardService{
 	
 		
 		Review_CategoryVO vo0 = map.get(0);
-		System.out.println(vo0);
 		boardmapper.reviewCategoryRegist(vo0);
 		
 		Review_CategoryVO vo1 = map.get(1);
-		System.out.println(vo1);
 		boardmapper.reviewCategoryRegist(vo1);
 		
 		Review_CategoryVO vo2 = map.get(2);
-		System.out.println(vo2);
 		boardmapper.reviewCategoryRegist(vo2);
 		
 		
@@ -152,7 +152,6 @@ public class boardServiceImpl implements boardService{
 															 .review_no(vo.getReview_no())
 															 .review_upload_no(file_list.get(file_i))
 															 .build();
-			System.out.println(uploadvo.toString());
 			boardmapper.reviewFileUpdate(uploadvo);
 			file_i++;
 			
@@ -175,7 +174,6 @@ public class boardServiceImpl implements boardService{
 								.review_category_no(Category_list.get(i))
 								.build();
 		
-			System.out.println(voi.toString());
 			boardmapper.reviewCategoryUpdate(voi);
 		}
 		
@@ -191,7 +189,57 @@ public class boardServiceImpl implements boardService{
 
 	@Override
 	public ArrayList<MainVO> getLocation() {
-		return boardmapper.getLocation();
+		ArrayList<MainVO> list = boardmapper.getLocation();
+		
+		ArrayList<MainVO> newlist =  new ArrayList<MainVO>();
+		int i = 0;
+		
+		for(MainVO vo : list) {
+			if(list.get(i).getReview_filename() == null) {
+				String[] review_filenames  = {"",""};
+				String[] review_filepaths  = {"",""};
+				String[] review_fileuuids  = {"",""};
+				MainVO newvo =	MainVO.builder().review_title(list.get(i).getReview_title())
+						.review_lat(list.get(i).getReview_lat())
+						.review_lng(list.get(i).getReview_lng())
+						.review_category(list.get(i).getReview_category())
+						.review_realaddress(list.get(i).getReview_realaddress())
+						.review_filenames(review_filenames)
+						.review_filepaths(review_filepaths)
+						.review_uuids(review_fileuuids)
+						.review_no(list.get(i).getReview_no())
+						.build();
+				newlist.add(newvo);
+				i++;
+				if(i == list.size())break;
+				continue;
+			} else {
+				String[] review_filenames  = {list.get(i).getReview_filename() , list.get(i+1).getReview_filename()};
+				String[] review_filepaths  = {list.get(i).getReview_filepath() , list.get(i+1).getReview_filepath()};
+				String[] review_fileuuids  = {list.get(i).getReview_uuid() , list.get(i+1).getReview_uuid()};
+				
+				
+				MainVO newvo =	MainVO.builder().review_title(list.get(i).getReview_title())
+						.review_lat(list.get(i).getReview_lat())
+						.review_lng(list.get(i).getReview_lng())
+						.review_category(list.get(i).getReview_category())
+						.review_realaddress(list.get(i).getReview_realaddress())
+						.review_filenames(review_filenames)
+						.review_filepaths(review_filepaths)
+						.review_uuids(review_fileuuids)
+						.review_no(list.get(i).getReview_no())
+						.review_group(list.get(i).getReview_group())
+						.build();				
+				newlist.add(newvo);
+			}
+			
+
+			i++;
+			i++;
+			if(i == list.size())break;
+		}
+		
+		return newlist;
 	}
 
 	@Override
@@ -226,8 +274,45 @@ public class boardServiceImpl implements boardService{
 
 	@Override
 	public ArrayList<MainVO> getPhoto_Category() {
-		return boardmapper.getPhoto_Category();
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public ArrayList<MainVO> getFirstCategory(String review_theme) {
+		
+		ArrayList<MainVO> list = boardmapper.getFirstCategory(review_theme);
+		
+		ArrayList<MainVO> newlist =  new ArrayList<MainVO>();
+		int i = 0;
+		
+		for(MainVO vo : list) {
+			String[] review_filenames  = {list.get(i).getReview_filename() , list.get(i+1).getReview_filename()};
+			String[] review_filepaths  = {list.get(i).getReview_filepath() , list.get(i+1).getReview_filepath()};
+			String[] review_fileuuids  = {list.get(i).getReview_uuid() , list.get(i+1).getReview_uuid()};
+			
+			
+			MainVO newvo =	MainVO.builder().review_title(list.get(i).getReview_title())
+					.review_lat(list.get(i).getReview_lat())
+					.review_lng(list.get(i).getReview_lng())
+					.review_category(list.get(i).getReview_category())
+					.review_realaddress(list.get(i).getReview_realaddress())
+					.review_filenames(review_filenames)
+					.review_filepaths(review_filepaths)
+					.review_uuids(review_fileuuids)
+					.review_no(list.get(i).getReview_no())
+					.review_group(list.get(i).getReview_group())
+					.review_theme(review_theme)
+					.build();				
+			newlist.add(newvo);
+			i++;
+			i++;
+			if(i == list.size())break;
+		}
+		
+		return newlist;
+	}
+
 	
 	
 	

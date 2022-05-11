@@ -56,10 +56,12 @@
   </script>
 
 
+
 </head>
 <body onload="javascript:popUp('/user/examine')">
 <iframe name="hframe4" style="display: none;"></iframe>
 <th:block th:replace="~{/include/header :: h_include }"></th:block>
+
 
 <div class="weekly-outer">
   <div class="weekly-content">
@@ -109,9 +111,9 @@
     </li>
     <li>
       <a href="#">
-        <span class="img"><img th:src="@{/img/img2.jpg}" class="inr-img"></span>
+        <span class="img"><img th:src="@{/img/main_gyunju.jpg}" class="inr-img"></span>
       </a>
-      <p class="item_title">대구</p>
+      <p class="item_title">경주</p>
       <p class="item_text">도란도란 가족과 함께
         <br>
         대구 호텔&입장권
@@ -119,7 +121,7 @@
     </li>
     <li>
       <a href="#">
-        <span class="img"><img th:src="@{/img/img3.jpg}" class="inr-img"></span>
+        <span class="img"><img th:src="@{/img/main_jeju (1).jpeg}" class="inr-img"></span>
       </a>
       <p class="item_title">제주</p>
       <p class="item_text">제주 주변섬 여행
@@ -129,17 +131,16 @@
     </li>
     <li>
       <a href="#">
-        <span class="img"><img th:src="@{/img/img4.jpg}" class="inr-img"></span>
+        <span class="img"><img th:src="@{/img/main_seoul (1).jpg}" class="inr-img"></span>
       </a>
       <p class="item_title">서울</p>
-      <p class="item_text">교복입고 롯데월드 가자!
-        <br>
-        자유이용권&이화교복 대여
+      <p class="item_text">
+        N서울타워에서 즐기는 로맨틱한 데이트
       </p>
     </li>
     <li>
       <a href="#">
-        <span class="img"><img th:src="@{/img/img5.jpg}" class="inr-img"></span>
+        <span class="img"><img th:src="@{/img/main_busan.png}" class="inr-img"></span>
       </a>
       <p class="item_title">부산</p>
       <p class="item_text">자유롭게 부산여행
@@ -148,12 +149,14 @@
       </p>
     </li>
   </ul>
+  <div class="youtube_link" style="margin-left: 255px; margin-top: 40px; margin-bottom: 40px;"></div>
 </div>
 
 
 
 <div id="map" style="width:80%;height:500px;padding:0;margin-left: 185px;"></div>
-
+	
+<form name="#" action="#" method="post">
 
 <div class="taste-middle-outer" style="display: none;">
   <div class="taste-middle">
@@ -163,7 +166,6 @@
   </div>
   <div class="taste-middle2">
       <div class="taste-sidecheck">
-
           <div style="margin-bottom: 15px;">
             <span style="font-size: 30px; font-weight: bold;">지역</span>
           </div>
@@ -246,7 +248,7 @@
               <span style="font-size: 30px; font-weight: bold;">여행 테마</span>
           </div>
           <div>
-              <input type="checkbox" name="" id="checkbox1" th:onclick="|food_check()|">
+              <input type="checkbox" name="checkbox1_1" id="checkbox1" value="a" checked>
               <label for="checkbox1">
                   <div>
                       <span>맛집탐방</span>
@@ -254,7 +256,7 @@
               </label>
           </div>
           <div>
-              <input type="checkbox" name="" id="checkbox2" th:onclick="|food_check()|">
+              <input type="checkbox" name="checkbox1_1" id="checkbox2"  value="b">
               <label for="checkbox2">
                   <div>
                       <span>자유여행</span>
@@ -262,16 +264,14 @@
               </label>
           </div>
           <div>
-              <input type="checkbox" name="" id="checkbox3" th:onclick="|food_check()|">
+              <input type="checkbox" name="checkbox1_1" id="checkbox3" value="c">
               <label for="checkbox3">
                   <div>
                       <span>액티비티</span>
                   </div>
               </label>
           </div>
-			
 			<hr>
-			
               <div class="revboard">
                 <a href="#"><img th:src="@{/img/리뷰게시판이미지.png}" class="revImg"></a>
               </div>
@@ -342,6 +342,33 @@
           <div>
             <span style="font-size: 20px; font-weight: bold;">지역</span>
           </div>
+          <div>
+              <input type="radio" name="checkbox1_1" id="checkbox1" value="a" >
+              <label for="checkbox1">
+                  <div>
+                      <span>맛집탐방</span>
+                  </div>
+              </label>
+          </div>
+          <div>
+              <input type="checkbox" name="checkbox1_1" id="checkbox2"  value="b" checked>
+              <label for="checkbox2">
+                  <div>
+                      <span>자유여행</span>
+                  </div>
+              </label>
+          </div>
+          <div>
+              <input type="checkbox" name="checkbox1_1" id="checkbox3" value="c">
+              <label for="checkbox3">
+                  <div>
+                      <span>액티비티</span>
+                  </div>
+              </label>
+          </div>
+          
+          <hr>
+                    
           <div>
               <input type="checkbox" name="" id="checkbox9">
               <label for="checkbox9">
@@ -474,37 +501,26 @@
   <div class="taste-middle2">
       <div class="taste-sidecheck">
           <div>
-              <span style="font-size: 20px; font-weight: bold;">레저스포츠</span>
-          </div>
-          <div>
-              <input type="checkbox" name="" id="checkbox13">
-              <label for="checkbox13">
+              <input type="checkbox" name="checkbox1_1" id="checkbox1" value="a" >
+              <label for="checkbox1">
                   <div>
-                      <span>스카이다이빙</span>
+                      <span>맛집탐방</span>
                   </div>
               </label>
           </div>
           <div>
-              <input type="checkbox" name="" id="checkbox14">
-              <label for="checkbox14">
+              <input type="checkbox" name="checkbox1_1" id="checkbox2"  value="b">
+              <label for="checkbox2">
                   <div>
-                      <span>래프팅</span>
+                      <span>자유여행</span>
                   </div>
               </label>
           </div>
           <div>
-              <input type="checkbox" name="" id="checkbox15">
-              <label for="checkbox15">
+              <input type="checkbox" name="checkbox1_1" id="checkbox3" value="c" checked>
+              <label for="checkbox3">
                   <div>
-                      <span>수상스키</span>
-                  </div>
-              </label>
-          </div>
-          <div>
-              <input type="checkbox" name="" id="checkbox16">
-              <label for="checkbox16">
-                  <div>
-                      <span>서핑</span>
+                      <span>액티비티</span>
                   </div>
               </label>
           </div>
@@ -605,8 +621,8 @@
       </div>
   </div>
 </div>
-<th:block th:replace="~{/include/footer :: f_include }"></th:block>
-<script>
+<th:block th:replace="~{./include/footer :: f_include }"></th:block>
+<script th:inline:"javascript">
   // 아이콘 클릭시 해당 클래스가 보여지면서 위치로가기
   var tasteImg = document.getElementById("tasteImg");
   var outer = document.querySelector(".taste-middle-outer")
@@ -617,7 +633,10 @@
 
   tasteImg.onclick = function() {
     outer.style.display = "block";
-
+	var theme = 'a';
+		$.getJSON("../getFirstCategory?review_theme=" + theme ,function(data){
+			console.log(data);
+		});
     if(outer2.style.display = "block") {
       outer2.style.display = "none"
     }
@@ -630,7 +649,10 @@
 
   locaImg.onclick = function() {
     outer2.style.display = "block";
-
+	var theme = 'b';
+		$.getJSON("../getFirstCategory?review_theme=" + theme ,function(data){
+			console.log(data);
+		});	
     if(outer.style.display = "block") {
       outer.style.display = "none"
     }
@@ -643,7 +665,10 @@
 
   playImg.onclick = function() {
     outer3.style.display = "block";
-
+	var theme = 'c';
+		$.getJSON("../getFirstCategory?review_theme=" + theme ,function(data){
+			console.log(data);
+		});
     if(outer2.style.display = "block") {
       outer2.style.display = "none"
     }
@@ -686,11 +711,23 @@
 
 <script th:inline="javascript">
 
-function food_check(){
-	if(this.checked){
-		console.log(1);
+
+
+$("input[type='checkbox']").on('change', function(e){
+	for(var i =0 ; i < $("input[name='checkbox1_1']:checked").length ; i++){
+		console.log($("input[name='checkbox1_1']:checked")[i].value);
 	}
-};
+	for(var i =0 ; i < $("input[name='checkbox1_2']:checked").length ; i++){
+		console.log($("input[name='checkbox1_2']:checked")[i].value);
+	}
+});
+
+
+
+function detail_function(x){
+	this.event.preventDefault();
+	location.href='http://localhost:8383/board/reviewDetail?review_no=' + x;
+}
 
 $(document).ready(function(){
 
@@ -711,6 +748,7 @@ $(document).ready(function(){
   var locationArr = [];
   var photo_category = [];
   
+  
 	$.getJSON("../getLocation",function(data){
 		
 		data.forEach(function(result,index){
@@ -721,7 +759,6 @@ $(document).ready(function(){
 		
 		
   for (var i = 0, ii = locationArr.length; i < ii; i++) {
-       console.log(locationArr);
        var spot = locationArr[i],
           latlng = new naver.maps.LatLng(spot.review_lng, spot.review_lat),
           marker = new naver.maps.Marker({
@@ -737,24 +774,23 @@ $(document).ready(function(){
                     ].join('')
               }
           });
-		
-	$.getJSON("../photo_category/"+locationArr[i].review_no,function(data){
-		
-		data.forEach(function(result,index){
-			console.log(1);
-			photo_category.push(result);
-		})	
-	});	
-  
-	console.log(photo_category);
-		
+		 
+		/*직접거는방식*/
           var contentString = [
-              '<div class="iw_inner">',
-              '   <h3>서울특별시청</h3>',
-              '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br>',
-              '       <img src="img/inchac.png" width="55" height="55" alt="서울시청" class="thumb" /><br>',
-              '       02-120 | 공공,사회기관 > 특별,광역시청<br>',
-              '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
+              '<div class="iw_inner" style="border: 1px solid #777; border-radius: 25px; width:315px" >',
+              '   <h4 style="margin-left:14px; margin-top:13px; font-style:oblique;">' +spot.review_category  +  '</h4>',
+              '   <p style="margin-left:14px; font-style:oblique;">' + spot.review_realaddress + '<br></p>',
+              '<div style="overflow:hidden;">',
+              '<span style="width:130px; height:130px; display:block; border-radius:50%; float:left; margin:3px 17px auto">',
+              '<a href="#"><img class="upload-thumb" style="border-radius: 50%; display: block; height:100%; border:0; max-width:100%; width:130px" onclick="detail_function(' + spot.review_no + ')" src="/display?review_filepath='+spot.review_filepaths[0] +'&review_uuid=' + spot.review_uuids[0] + '&review_filename=' + spot.review_filenames[0]+'"></a>',
+              '</span>',
+              '<span style="width:130px; height:130px; display:block; border-radius:50%; float:left; margin:3px auto">',
+              '<a href="#"><img class="upload-thumb" style="border-radius: 50%; display: block; height:100%; border:0; max-width:100%; width:130px" onclick="detail_function(' + spot.review_no + ')" src="/display?review_filepath='+spot.review_filepaths[1] +'&review_uuid=' + spot.review_uuids[1] + '&review_filename=' + spot.review_filenames[1]+'"></a>',
+              '</span>',
+              '</div>',
+              '       <br>',
+              '   <p style="margin-left:14px; margin-bottom:14px; font-style:oblique; font-weight:bold;">',
+              ' 리뷰제목:\''+ spot.review_title +'\'',
               '   </p>',
               '</div>'
           ].join('');
@@ -762,8 +798,8 @@ $(document).ready(function(){
           var infoWindow = new naver.maps.InfoWindow({
               content: contentString,
               disableAnchor : true,
-              borderWidth : 1,
-              maxWidth : 300
+              borderWidth : 0,
+              maxWidth :400
 
           });
 
@@ -825,7 +861,7 @@ $(document).ready(function(){
   var markerClustering = new MarkerClustering({
       minClusterSize: 1,
       //클러스터로 표시되는 최소숫자
-      maxZoom: 12,
+      maxZoom: 11,
       //어디까지 줌땡기면 클러스터 표시 <-> 마커표시로 바뀔것인가
       map: map,
       markers: markers,
@@ -904,6 +940,58 @@ function hideMarker(map, marker) {
     text = $(e.target).parent().parent().next().next().text();
     $(e.target).parent().parent().next().next().text("들어가서 확인하기");
   });
+
+  $(".img img").click(function(e){
+	
+		
+	
+
+		if($(e.target).parent().parent().next().html() == '강원'){
+			if($(".youtube_link").html() == '' ){
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/ANTdfJ6-js8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			} else{
+				$(".youtube_link").children().remove();
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/ANTdfJ6-js8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			}
+		}
+		
+		if($(e.target).parent().parent().next().html() == '경주'){
+			if($(".youtube_link").html() == '' ){
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/pNBaDD3pgyY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			} else{
+				$(".youtube_link").children().remove();
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/pNBaDD3pgyY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			}
+		}		
+		
+		if($(e.target).parent().parent().next().html() == '제주'){
+			if($(".youtube_link").html() == '' ){
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/R-t4oCm-szQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			} else{
+				$(".youtube_link").children().remove();
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/R-t4oCm-szQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			}
+		}		
+		
+		if($(e.target).parent().parent().next().html() == '서울'){
+			if($(".youtube_link").html() == '' ){
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/tli25GoI8yg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			} else{
+				$(".youtube_link").children().remove();
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/tli25GoI8yg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			}
+		}		
+		
+		if($(e.target).parent().parent().next().html() == '부산'){
+			if($(".youtube_link").html() == '' ){
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/IZBommf56BU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			} else{
+				console.log($(".youtube_link").children().remove());
+				$(".youtube_link").append('<iframe width="800" height="450" src="https://www.youtube.com/embed/IZBommf56BU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			}
+		}		
+		
+	})
 
   $(".img img").mouseleave(function(e){
     $(e.target).parent().parent().next().next().text(text);
