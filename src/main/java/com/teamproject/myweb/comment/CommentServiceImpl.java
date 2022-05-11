@@ -28,5 +28,10 @@ public class CommentServiceImpl implements CommentService {
 		return commentMapper.commentDelete(cno);
 	}
 
+	@Override
+	public int commentTotal(int free_bno) {
+		return commentMapper.commentTotal(free_bno);
+	}
+
 	
 }

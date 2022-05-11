@@ -67,8 +67,8 @@
                     <tr>
                         <th class="title">성별</th>
                         <td class="info">
-                            <input type="radio">남자
-                            <input type="radio">여자
+                            <input type="radio" name="gender">남자
+                            <input type="radio" name="gender">여자
                         </td>
                     </tr>
                       <!-- 성별/관심사 checked   required ? -->
@@ -185,9 +185,6 @@
         }
         function DMList() {
             window.open("/message/messageReceiveList", "myDM", "width=540, height=500, left=200, top=100");
-          }
-        function DMSend() {
-            window.open("/message/messageSend", "myDM", "width=540, height=500, left=200, top=100");
           }
         
         function DMSend() {

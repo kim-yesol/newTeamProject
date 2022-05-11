@@ -56,6 +56,23 @@ CREATE TABLE DEBATE (
 
 ===================================debate
 
+
+CREATE TABLE EXAMINE(
+	EXAM_NO INT PRIMARY KEY auto_increment,
+    USER_ID VARCHAR(20) NOT NULL,
+    USER_NAME VARCHAR(10) NOT NULL,
+    exam1 varchar(100),
+    exam2 varchar(100),
+    exam3 varchar(100),
+    exam4 varchar(100),
+    exam5 varchar(100),
+	exam6 varchar(100),
+    exam7 varchar(500)
+
+);
+
+=====================================examine
+
 create table freeBoard (
 	free_bno int primary key auto_increment,
     free_writer varchar(20) not null,
@@ -92,3 +109,4 @@ CREATE TABLE REVIEW_CATEGORY(
 );
 
 ==================================review_category
+

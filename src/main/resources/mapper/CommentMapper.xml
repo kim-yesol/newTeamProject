@@ -25,4 +25,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from comment
 		where cno = #{cno}
 	</delete>
+	
+	<select id="commentTotal" resultType="int">
+		select count(*) from comment
+		where free_bno = #{free_bno};
+	</select>
 </mapper>

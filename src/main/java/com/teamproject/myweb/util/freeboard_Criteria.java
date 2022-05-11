@@ -20,6 +20,7 @@ public class freeboard_Criteria {
 	
 		
 	public freeboard_Criteria(int page, int amount) {
+		super();
 		this.page = page;
 		this.amount = amount;
 		

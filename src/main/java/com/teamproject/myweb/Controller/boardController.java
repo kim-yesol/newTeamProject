@@ -47,11 +47,11 @@ public class boardController {
 	@Qualifier("CommentService")
 	private CommentService commentService;
 	
-  @Autowired
+	@Autowired
 	@Qualifier("debateService")
 	private DebateService debateService;
 
-  @Autowired
+	@Autowired
 	private boardService boardservice;
 
 
@@ -94,6 +94,8 @@ public class boardController {
 	
 	@GetMapping("/freeBoardReg")
 	public String freeBoardReg() {
+		
+		
 		return "board/freeBoardReg";
 	}
 	
@@ -102,8 +104,12 @@ public class boardController {
 		
 		freeBoardVO detail = freeBoardService.getDetail(free_bno);
 		ArrayList<CommentVO> commentVO = commentService.commentList(free_bno);
+		int total = commentService.commentTotal(free_bno);
+		
 		model.addAttribute("detail", detail);
 		model.addAttribute("commentVO", commentVO);
+		model.addAttribute("total", total);
+		
 		return "board/freeBoardDetail";
 	}
 	
@@ -295,7 +301,8 @@ public class boardController {
 	
 	@PostMapping("/reviewForm")
 	public String reviewform(reviewVO reviewvo, RedirectAttributes RA,@RequestParam("file") List<MultipartFile> list, Review_Upload_CategoryVO category) {
-		
+
+
 		reviewVO vo	=	reviewVO.builder().review_category(category.getReview_category_detail_nm()[0] + " > " + 
 														   category.getReview_category_detail_nm()[1] + " > " +
 														   category.getReview_category_detail_nm()[2])

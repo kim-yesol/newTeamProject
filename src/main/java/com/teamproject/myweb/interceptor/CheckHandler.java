@@ -23,7 +23,6 @@ public class CheckHandler implements HandlerInterceptor{
 		
 		HttpSession session = request.getSession();
 		UserVO userVO = (UserVO)session.getAttribute("userVO");
-		System.out.println(request.getContextPath());
 		
 		if(userVO == null) {
 			System.out.println("인터셉터");

@@ -22,11 +22,46 @@
   <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" >
   <link th:href="@{https://fonts.googleapis.com/css2?family=Lato&display=swap}" rel="stylesheet">
   <link rel="stylesheet" type="text/css" th:href="@{/css/showMoreItems-theme.min.css}" />
+  
+  <script type="text/javascript">
+	  
+	  
+	  function getCookie(name){
+		  
+		  var cookie = document.cookie;
+		  if(document.cookie != ""){
+			  var cookie_array = cookie.split("; ");
+			  for (var i in cookie_array){
+				  var cookie_name = cookie_array[i].split("=");
+				  
+				  if(cookie_name[0] == "popupClose"){
+					  return cookie_name[1]; /* N */
+				  }
+			  }
+		  }
+		  return "";
+	  };
+	  
+	  
+	  function popUp(url) {
+	 	var cookieCheck = getCookie("popupClose");
+	 	var userVO = '[[${session.userVO}]]';
+	 	/* userVO가 공백이 아니고, cookie가 N이 아닐때 팝업호출 */
+	 	if(userVO != "" & cookieCheck != "N"){
+	 	 	window.open(url, "examine", "width=650, height=800, left=300, top=100");
+	 		  
+	 	}
+	  }
+	
+  </script>
+
+
 
 </head>
-<body>
+<body onload="javascript:popUp('/user/examine')">
+<iframe name="hframe4" style="display: none;"></iframe>
+<th:block th:replace="~{/include/header :: h_include }"></th:block>
 
-<th:block th:replace="~{./include/header :: h_include }"></th:block>
 
 <div class="weekly-outer">
   <div class="weekly-content">
@@ -131,8 +166,86 @@
   </div>
   <div class="taste-middle2">
       <div class="taste-sidecheck">
-          <div>
-              <span style="font-size: 20px; font-weight: bold;">여행테마</span>
+          <div style="margin-bottom: 15px;">
+            <span style="font-size: 30px; font-weight: bold;">지역</span>
+          </div>
+          <div class="sidewrap">
+          	<div class="sideleft">
+		          <div>
+		              <input type="checkbox" name="" id="checkbox5">
+		              <label for="checkbox5">
+		                  <div>
+		                      <span>서울</span>
+		                  </div>
+		              </label>
+		          </div>
+		          <div>
+		              <input type="checkbox" name="" id="checkbox6">
+		              <label for="checkbox6">
+		                  <div>
+		                      <span>경기도</span>
+		                  </div>
+		              </label>
+		          </div>
+		          <div>
+		              <input type="checkbox" name="" id="checkbox7">
+		              <label for="checkbox7">
+		                  <div>
+		                      <span>충청도</span>
+		                  </div>
+		              </label>
+		          </div>
+		            <div>
+		              <input type="checkbox" name="" id="checkbox7">
+		              <label for="checkbox7">
+		                  <div>
+		                      <span>인천</span>
+		                  </div>
+		              </label>
+		          </div>
+		          </div>
+		          
+		          <div class="sideright">
+		         
+		            <div>
+		              <input type="checkbox" name="" id="checkbox7">
+		              <label for="checkbox7">
+		                  <div>
+		                      <span>전라도</span>
+		                  </div>
+		              </label>
+		          </div>
+		            <div>
+		              <input type="checkbox" name="" id="checkbox7">
+		              <label for="checkbox7">
+		                  <div>
+		                      <span>경상도</span>
+		                  </div>
+		              </label>
+		          </div>
+		            <div>
+		              <input type="checkbox" name="" id="checkbox7">
+		              <label for="checkbox7">
+		                  <div>
+		                      <span>강원도</span>
+		                  </div>
+		              </label>
+		          </div>
+		          <div>
+		              <input type="checkbox" name="" id="checkbox8">
+		              <label for="checkbox8">
+		                  <div>
+		                      <span>제주도</span>
+		                  </div>
+		              </label>
+				   </div>
+				 </div>
+		   </div>
+		   
+              <hr>
+              
+                        <div style="margin-bottom: 15px;">
+              <span style="font-size: 30px; font-weight: bold;">여행 테마</span>
           </div>
           <div>
               <input type="checkbox" name="checkbox1_1" id="checkbox1" value="a" checked>
@@ -158,51 +271,13 @@
                   </div>
               </label>
           </div>
-
-          <hr>
-
-          <div>
-            <span style="font-size: 20px; font-weight: bold;">지역</span>
-          </div>
-          <div>
-              <input type="checkbox" name="checkbox1_2" id="checkbox5" value="A">
-              <label for="checkbox5">
-                  <div>
-                      <span>서울</span>
-                  </div>
-              </label>
-          </div>
-          <div>
-              <input type="checkbox" name="checkbox1_2" id="checkbox6" value="B">
-              <label for="checkbox6">
-                  <div>
-                      <span>경기</span>
-                  </div>
-              </label>
-          </div>
-          <div>
-              <input type="checkbox" name="checkbox1_2" id="checkbox7" value="C">
-              <label for="checkbox7">
-                  <div>
-                      <span>강원</span>
-                  </div>
-              </label>
-          </div>
-          <div>
-              <input type="checkbox" name="checkbox1_2" id="checkbox8" value="D">
-              <label for="checkbox8">
-                  <div>
-                      <span>부산</span>
-                  </div>
-              </label>
-
-              <hr>
-
+			<hr>
               <div class="revboard">
                 <a href="#"><img th:src="@{/img/리뷰게시판이미지.png}" class="revImg"></a>
               </div>
 
-          </div>
+          
+        
 
           
           
@@ -325,6 +400,38 @@
                       <span>부산</span>
                   </div>
               </label>
+          <div>
+              <input type="checkbox" name="" id="checkbox10">
+              <label for="checkbox10">
+                  <div>
+                      <span>경기</span>
+                  </div>
+              </label>
+          </div>
+          <div>
+              <input type="checkbox" name="" id="checkbox10">
+              <label for="checkbox10">
+                  <div>
+                      <span>경기</span>
+                  </div>
+              </label>
+          </div>
+          <div>
+              <input type="checkbox" name="" id="checkbox10">
+              <label for="checkbox10">
+                  <div>
+                      <span>경기</span>
+                  </div>
+              </label>
+          </div>
+          <div>
+              <input type="checkbox" name="" id="checkbox10">
+              <label for="checkbox10">
+                  <div>
+                      <span>경기</span>
+                  </div>
+              </label>
+          </div>
 
               <hr>
 
@@ -891,6 +998,16 @@ function hideMarker(map, marker) {
   });
   
 });
+
+
+(function() {
+	var msg = JSON.parse('[[${msg}]]');	
+	if(msg != null) {
+		alert(msg);
+	}
+})();
+	
+
   
 
   
