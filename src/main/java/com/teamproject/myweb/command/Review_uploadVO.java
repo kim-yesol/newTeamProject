@@ -17,6 +17,7 @@ public class Review_uploadVO {
 	private String review_filename;
 	private String review_filepath;
 	private String review_uuid;
+	private LocalDateTime review_regdate;
 	private Integer review_no;
 	private String review_writer;
 }
