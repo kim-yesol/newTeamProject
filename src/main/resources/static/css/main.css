@@ -229,7 +229,7 @@ img {
 }
 
 .taste-sidecheck {
-  width: 290px;
+  width: 240px;
   height: auto;
   background-color: white;
   float: left;
@@ -330,5 +330,19 @@ img {
 .inr-img:hover {
   transform: scale(1.1);
 }
-
-
+.taste-sidecheck span {
+  	font-size: 16px;
+  	line-height: 40px;
+  	font-weight: lighter;
+}
+  	
+.sidewrap{
+	overflow: hidden;
+	padding-right: 20px;
+}
+.sideleft{
+	float: left;
+}
+.sideright{
+	float: right;
+}
