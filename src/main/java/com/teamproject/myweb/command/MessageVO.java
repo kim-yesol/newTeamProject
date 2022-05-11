@@ -27,5 +27,5 @@ public class MessageVO {
 	private String msender;
 	private String mcontent;
 	private LocalDateTime msenddate;
-	private LocalDateTime mopendate;
+	private Integer mcheck;
 }
