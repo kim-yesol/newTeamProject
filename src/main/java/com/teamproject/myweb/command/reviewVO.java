@@ -22,5 +22,6 @@ public class reviewVO {
 	private String review_title;
 	private String review_content;
 	private String review_realAddress;
+	private String review_theme;
 	
 }

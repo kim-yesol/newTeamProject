@@ -13,7 +13,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				    review_lng,
 				    review_title,
 				    review_content,
-				    review_realAddress
+				    review_realAddress,
+				    review_theme
 				) values(
 					#{review_writer},
 					#{review_category},
@@ -21,7 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					#{review_lng},
 					#{review_title},
 					#{review_content},
-					#{review_realAddress}
+					#{review_realAddress},
+					#{review_theme}
 				)
 	</insert>
 	
@@ -181,8 +183,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	
 	<select id="getLocation" resultType="MainVO">
-		SELECT REVIEW_LAT,REVIEW_LNG,review_realaddress,review_no
-		FROM REVIEWBOARD
+		select C1.*, C2.REVIEW_FILENAME , C2.REVIEW_FILEPATH, C2.REVIEW_UUID
+		from
+		(
+		select A1.REVIEW_NO, A1.REVIEW_REGDATE, A1.REVIEW_CATEGORY, A1.REVIEW_LAT , A1.REVIEW_LNG , A1.REVIEW_REALADDRESS , A1.REVIEW_TITLE, A2.review_group
+		from reviewboard A1
+		left outer join review_category A2
+		on A1.review_no = A2.review_no
+		limit 1
+		) C1
+		left outer join review_upload C2
+		on C1.review_no = C2.review_no
 	</select>
 	
 	
@@ -210,6 +221,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getCategoryPrimeKey" resultType="int">
 		SELECT * FROM REVIEW_CATEGORY
 		WHERE REVIEW_NO = #{review_no}
+	</select>
+	
+	<select id="getFirstCategory" resultType="MainVO">
+		select C1.*, C2.REVIEW_FILENAME , C2.REVIEW_FILEPATH, C2.REVIEW_UUID
+		from
+		(
+		select A1.REVIEW_NO, A1.REVIEW_REGDATE, A1.REVIEW_CATEGORY, A1.REVIEW_LAT , A1.REVIEW_LNG , A1.REVIEW_REALADDRESS , A1.REVIEW_TITLE,A1.review_theme ,A2.review_group
+		from reviewboard A1
+		inner join review_category A2
+		on A1.review_no = A2.review_no
+		limit 1)C1
+		left outer join review_upload C2
+		on C1.review_no = C2.review_no
+		where C1.review_theme = #{review_theme}
 	</select>
 	
 </mapper>
