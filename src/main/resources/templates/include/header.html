@@ -47,7 +47,7 @@
               	<li><a th:href="@{/user/userJoin}">회원가입</a></li>
               </th:block>
               <th:block  th:unless="${session.userVO} == null">
-              	<li><a href="#">로그아웃</a></li>	
+              	<li><a th:href="@{/user/logout}">로그아웃</a></li>	
               </th:block>
           </ul>
 

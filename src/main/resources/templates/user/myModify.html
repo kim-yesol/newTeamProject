@@ -16,7 +16,7 @@
 
  <th:block th:replace="~{/include/header :: h_include }"></th:block>
  
-   <form action="modify" method="post">
+   <form action="modify" name="modify" method="post">
       <div class="container-fluid text-center">    
         <div class="row content text-center">
             <div class="col-sm-6 text-center" style="margin: 0 auto; float: none;"> 
@@ -104,7 +104,7 @@
                     <div class="infoBottom">
                       <button type="submit" class="save">저장</button>
                       <!-- submit-->
-                          <button type="button" class="out" onclick="location.href='myPage'">나가기</button>
+                          <button type="button" class="out" th:onclick="|exit()|">나가기</button>
                           <button type="button" class="out" th:onclick="|user_delete()|">회원탈퇴</button>
                   </div>
             </div>
@@ -127,6 +127,12 @@
 			document.modify.action = "userDelete";
 			document.modify.submit();
 		}
+	}
+	
+	function exit() {
+		this.event.preventDefault();
+		var user_no = JSON.parse('[[${session.userVO.user_no}]]');
+		location.href='http://localhost:8383/user/myPage?user_no=' + user_no;
 	}
 </script>
 

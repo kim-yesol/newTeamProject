@@ -45,7 +45,7 @@ public class userController {
 		System.out.println(vo.toString());
 		userService.modify(vo);
 		
-		return "redirect:/user/myPage";
+		return "redirect:/main";
 	}
 	
 	@GetMapping("/userLogin")
@@ -99,8 +99,11 @@ public class userController {
 	}
 	
 	@GetMapping("/logout")
-	public String logout(HttpSession session, UserCheckVO vo,Model model) {
-		return null;
+	public String logout(HttpSession session) {
+		
+		session.invalidate();
+		
+		return "redirect:/main";
 	}
 	
 }
