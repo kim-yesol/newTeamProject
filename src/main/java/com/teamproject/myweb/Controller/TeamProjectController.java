@@ -12,5 +12,11 @@ public class TeamProjectController {
 		
 		return "main";
 	}
+	
+	@GetMapping("/test")
+	public String test() {
+		
+		return "test";
+	}
 
 }

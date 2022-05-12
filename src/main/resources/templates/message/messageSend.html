@@ -12,19 +12,22 @@
 </head>
 <body>
 
-    <div class="box">
-        <h3 class="title">메시지보내기</h3>
-        <h4 class="receiver">TO.계란후라이 <!-- 받는사람 --></h4>
+    <form name="sendForm" action="sendForm" method="post">
+    	<div class="box">
+        	<h3 class="title">메시지보내기</h3>
+        	<h4 class="receiver">TO.<input type="text" name="mreceiver" value="B">
+        	<input type="hidden" name="msender" value="세션에아이디"> <!-- 보내는사람 --></h4>
 
-        <div class="innerbox1">
-            <textarea class="textarea" name="dm_sendCon" id="" cols="45" rows="18" ></textarea>
-            <input type="hidden" name="dm_sendDate">
-        </div>
-        <div class="innerbottom">
-            <button type="button" class="messageBtn">보내기</button>
-            <button type="button" class="messageBtn" onclick="location.href='messageList'">목록으로</button>
-        </div>
-    </div>
+        	<div class="innerbox1">
+            	<textarea class="textarea" name="mcontent" id="" cols="45" rows="18" ></textarea>
+            	<input type="hidden" name="dm_sendDate">
+        	</div>
+        	<div class="innerbottom">
+            	<button type="submit" class="messageBtn">보내기</button>
+            	<button type="button" class="messageBtn" onclick="location.href='messageList'">목록으로</button>
+        	</div>
+    	</div>
+    </form>
 
     
 </body>

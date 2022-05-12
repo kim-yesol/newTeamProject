@@ -36,6 +36,7 @@
                   <div class="infotitle">
                     <h2 class="h2">회원정보</h2>
                     <div class="infoBottom1">
+                      <button type="button" class="myDM" onclick="DMSend()">쪽지 보내기</button>
                       <button type="button" class="myDM" onclick="DMList()">내 쪽지함</button>
                       <!-- location에 user_id 넘겨서 쪽지데이터 받기-->
                       <button type="button" class="save" onclick="location.href='myModify'">회원정보수정</button> 
@@ -66,8 +67,8 @@
                     <tr>
                         <th class="title">성별</th>
                         <td class="info">
-                            <input type="radio">남자
-                            <input type="radio">여자
+                            <input type="radio" name="gender">남자
+                            <input type="radio" name="gender">여자
                         </td>
                     </tr>
                       <!-- 성별/관심사 checked   required ? -->
@@ -183,8 +184,12 @@
           
         }
         function DMList() {
-            window.open("/message/messageList", "myDM", "width=540, height=500, left=200, top=100");
+            window.open("/message/messageReceiveList", "myDM", "width=540, height=500, left=200, top=100");
           }
+        
+        function DMSend() {
+        	window.open("/message/messageSend", "DMSend", "width=540, height=500, left=200, top=100");
+        }
 
       </script>
     </body>

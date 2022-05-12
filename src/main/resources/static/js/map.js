@@ -3,6 +3,7 @@
       $(".output").val(z + "  선택완료");
       $("#lat").val(x);
       $("#lng").val(y);
+      $("#realAddress").val(z);
     }
 
    $(document).ready(function(){
@@ -62,7 +63,7 @@
             '<div style="padding:10px;min-width:200px;line-height:150%;">',
             '<h4 style="margin-top:5px;">검색 좌표</h4><br />',
             htmlAddresses.join('<br />'),
-            '<div><a href="#" id="select" onclick="linkfuntion('+ latlng.x + ',' +  latlng.y + ',\'' + address.roadAddress + '\')">선택하기</a></div>',
+            '<div><a href="#" id="select" onclick="linkfuntion('+ latlng.x + ',' +  latlng.y + ',\'' + address.jibunAddress + '\')">선택하기</a></div>',
             //값넘기는 방법
             '</div>'
           ].join('\n'));
@@ -121,6 +122,14 @@
 
        map.addListener('click', function (e) {
          var latlng = e.coord;
+         console.log(latlng.x);
+         if(latlng.x > 129.5 || latlng.x <126){
+				alert("여행가능 범위내에서 선택해주시기 바랍니다");
+				return;
+			} else if(latlng.y >38.5 || latlng.y < 33){
+				alert("여행가능 범위내에서 선택해주시기 바랍니다");
+				return;
+			}
          searchCoordinateToAddress(e.coord);
        });
 

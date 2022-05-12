@@ -6,15 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+    <th:block th:fragment="commoncss">
+   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}">
+  	<link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}">
+  	<script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+    </th:block>
+
 </head>
 <body>
 
 <th:block th:fragment="f_include">
-    <footer id="footer">
+    <footer id="footer" style="background: #313131;">
         <div class="container_footer">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <a href="#"><h2>TITLE</h2></a>
+            <div class="row footerbox" style="text-align: center">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="border-right: 1px solid white; color: white;">
+                    <a th:href="@{/main}"><h2>MainPage</h2></a>
                     <h3>FOLLOW US</h3>
                     <ul class="footer_logo">
                         <a href="https://www.instagram.com/"><img src="/img/instagram.png" alt=""></a>
@@ -23,7 +31,7 @@
                     </ul>
                 </div>
 
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="border-right: 1px solid white;">
                     <ul class="fl_left">
                         <span>조원:권인우 김민석 김예솔 안기렬 채수병</span><br>
                         <span>전화번호 : 02-561-1911 | 서울 강남구 테헤란로7길 7</span><br>
@@ -42,6 +50,8 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+            <div class="blank_box">
             </div>
         </div>  
     </footer>
